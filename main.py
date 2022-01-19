@@ -27,7 +27,7 @@ class ShoppingDetail:
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=self.options)
 
         # 60sec wait
-        self.wait = WebDriverWait(self.driver, 60)
+        self.wait = WebDriverWait(self.driver, 30)
 
         # target.json load
         self.target = json.load(open("target.json"))
@@ -36,8 +36,8 @@ class ShoppingDetail:
         self.conf = json.load(open("conf.json"))
 
     def detail(self):
-        # global 4 exception
-        global mall
+        # 4 exception
+        global mall, url
         # redefining 4 convenience
         driver = self.driver
         wait = self.wait
@@ -46,6 +46,7 @@ class ShoppingDetail:
 
         # dictionary 4 output.json
         d = {}
+        d_error = {}
 
         # defining 4 tqdm
         t = tq.trange(1, len(target))
@@ -77,14 +78,21 @@ class ShoppingDetail:
 
                 # adding data to dictionary
                 d[i] = {"target": mall, "url": url, "productName": product_name, "originPrice": origin_price,
-                            "salePrice": sale_price, "discountPercent": discount_percent}
+                        "salePrice": sale_price, "discountPercent": discount_percent}
 
             # If the element you are looking for is not found or the page does not exist
-            except NoSuchElementException or TimeoutException:
-                print(mall, " Error")
+            except NoSuchElementException:
+                d_error[i] = {"reason": "NoSuchElementException", "target": mall,
+                              "product_id": target[i]["product_id"], "url": url}
+                print("\n", mall, " : No Such Element Exception")
+            except TimeoutException:
+                d_error[i] = {"reason": "TimeoutException", "target": mall,
+                              "product_id": target[i]["product_id"], "url": url}
+                print("\n", mall, " : Timeout Exception")
 
         # ensure_ascii = False -> The letters are printed as they are. (To prevent cracking of Korean letters.)
         json.dump(d, open("output.json", "w"), ensure_ascii=False)
+        json.dump(d_error, open("error.json", "w"), ensure_ascii=False)
 
 
 shop = ShoppingDetail()
