@@ -1,4 +1,5 @@
 import json
+import tqdm as tq
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.chrome.service import Service
@@ -29,10 +30,15 @@ class ShoppingDetail:
         target = self.target
         count = 1
         d = {}
-        for i in target:
+        t = tq.trange(1, len(target))
+        for i, _ in zip(target, t):
             try:
                 mall = target[i]["target"]
                 url = conf[mall]["url"] + target[i]["product_id"]
+
+                t.set_description("[Current target : %s]" % mall)
+                t.refresh()
+
                 driver.get(url)
                 product_name = wait.until(EC.presence_of_element_located((By.XPATH, conf[mall]["productName"]))).text
                 origin_price = driver.find_element(By.XPATH, conf[mall]["originPrice"]).text
@@ -46,9 +52,7 @@ class ShoppingDetail:
                     discount_percent = driver.find_element(By.XPATH, conf[mall]["discountPercent"]).text
                 d[count] = {"target": mall, "url": url, "productName": product_name, "originPrice": origin_price,
                             "salePrice": sale_price, "discountPercent": discount_percent}
-
                 count += 1
-                print(mall, " : ", product_name)
             except NoSuchElementException or TimeoutException:
                 count += 1
                 print(mall, " Error")
