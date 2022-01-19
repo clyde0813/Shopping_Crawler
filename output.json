@@ -1,5 +1,125 @@
 {
   "1": {
+    "target": "interpark",
+    "url": "https://shopping.interpark.com/product/productInfo.do?prdNo=8175645813",
+    "productName": "#특가#농심 백산수 무라벨 2L 12병 생수",
+    "originPrice": "11,500",
+    "salePrice": "9,500",
+    "discountPercent": "17"
+  },
+  "2": {
+    "target": "11st",
+    "url": "https://www.11st.co.kr/products/3889674767",
+    "productName": "LG 트롬 세탁기 건조기세트 F24WW-7WL(F24WDWD+RH17WTLN) 24KG+17KG 1등급 화이트",
+    "originPrice": "2,221,050",
+    "salePrice": "1,943,420",
+    "discountPercent": "12"
+  },
+  "3": {
+    "target": "g9",
+    "url": "https://www.g9.co.kr/Display/VIP/Index/1963411775",
+    "productName": "클래식 미니 클리어 퍼 부츠",
+    "originPrice": "162,610",
+    "salePrice": null,
+    "discountPercent": null
+  },
+  "4": {
+    "target": "wemakeprice",
+    "url": "https://front.wemakeprice.com/deal/607876520",
+    "productName": "★페넬로페 씬씬씬플러스 미라클 올데이 팬티/밴드 기저귀 외 특별 모음전",
+    "originPrice": "55,100",
+    "salePrice": "40,980",
+    "discountPercent": null
+  },
+  "5": {
+    "target": "gsshop",
+    "url": "https://with.gsshop.com/prd/prd.gs?prdid=98388038",
+    "productName": "[백화점][폴햄키즈] 핫스킨 발열내의 셋업PKB4UI3910-",
+    "originPrice": "7,900",
+    "salePrice": "5,930",
+    "discountPercent": "25"
+  },
+  "6": {
+    "target": "tmon",
+    "url": "https://www.tmon.co.kr/deal/9621981506",
+    "productName": "[완벽한설준비] 오아이비 최대 40% 할인쿠폰/ 22년 봄 신상 7부/ 얇은긴팔 추가 + 봄여름출산준비",
+    "originPrice": "5,500원",
+    "salePrice": "3,850원~",
+    "discountPercent": null
+  },
+  "7": {
+    "target": "cjonstyle",
+    "url": "https://display.cjonstyle.com/p/mocode/M1167203",
+    "productName": "쉬즈미스/헤지스/지고트外 패션 인기브랜드 명절특가",
+    "originPrice": "179,300",
+    "salePrice": "134,480",
+    "discountPercent": "25"
+  },
+  "8": {
+    "target": "skstoa",
+    "url": "https://www.skstoa.com/display/goods/25328999",
+    "productName": "*LA갈비 500g *9팩 | 원산지 : 상품정보 참조",
+    "originPrice": "89,900원",
+    "salePrice": "88,900",
+    "discountPercent": "1%"
+  },
+  "9": {
+    "target": "emart",
+    "url": "http://emart.ssg.com/item/itemView.ssg?itemId=1000030022237",
+    "productName": "오뚜기 참치 마일드 100g*4 + 살코기 100g*4\n원산지: 상세설명참조",
+    "originPrice": "9,980",
+    "salePrice": "7,480",
+    "discountPercent": "에누리\n25%"
+  },
+  "10": {
+    "target": "ssg",
+    "url": "http://department.ssg.com/item/dealItemView.ssg?itemId=1000278585278",
+    "productName": "골든구스 여성 스카이스타 GWF00230 F002194 80185",
+    "originPrice": "998,000",
+    "salePrice": null,
+    "discountPercent": null
+  },
+  "11": {
+    "target": "auction",
+    "url": "http://itempage3.auction.co.kr/DetailView.aspx?itemno=C242766249",
+    "productName": "6년근 홍삼 진액 홍삼스틱 에브리데이 365 100포",
+    "originPrice": "33,900원",
+    "salePrice": "32,880원",
+    "discountPercent": "3%"
+  },
+  "12": {
+    "target": "gmarket",
+    "url": "http://item.gmarket.co.kr/Item?goodscode=2135208802",
+    "productName": "JAJU 설빅세일 언더웨어원마일웨어 특가",
+    "originPrice": "23,900원",
+    "salePrice": "10,800원",
+    "discountPercent": null
+  },
+  "13": {
+    "target": "lotteon",
+    "url": "https://www.lotteon.com/p/product/LO1445529569",
+    "productName": "매일두유 190ml 6종 48팩 99.9/검은콩/고단백/식이섬유/식이섬유저당",
+    "originPrice": "27,400",
+    "salePrice": "5%",
+    "discountPercent": "5%"
+  },
+  "14": {
+    "target": "galleria",
+    "url": "https://www.galleria.co.kr/goods/initDetailGoods.action?goods_no=2201385311",
+    "productName": "극세사 허그 옐로우[8온스] 슈퍼싱글세트[퀼트이불+패드+베개커버1장]",
+    "originPrice": "",
+    "salePrice": "26% 203,500원\n275,000원\n0.0\n리뷰 0개",
+    "discountPercent": "26"
+  },
+  "15": {
+    "target": "lotteimall",
+    "url": "https://www.lotteimall.com/goods/viewGoodsDetail.lotte?goods_no=1421308913",
+    "productName": "[참존/단독구성] 디에이지 레드5종 더블구성 /스킨2로션2에센스2아이2콘트롤2 +추가사은품, 쇼핑백2",
+    "originPrice": "49,900",
+    "salePrice": "24",
+    "discountPercent": "24"
+  },
+  "16": {
     "target": "coupang",
     "url": "https://www.coupang.com/vp/products/201004687",
     "productName": "모이브닝 왕대두 버킷햇",

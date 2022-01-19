@@ -57,9 +57,9 @@
   },
   "emart": {
     "url": "http://emart.ssg.com/item/itemView.ssg?itemId=",
-    "productName": "//*[@id=\"content\"]/div[1]/div[1]/div[2]/div[2]/h2",
-    "originPrice": "//*[@id=\"content\"]/div[1]/div[1]/div[2]/div[3]/div[1]/div/span[2]/em",
-    "salePrice": "//*[@id=\"content\"]/div[1]/div[1]/div[2]/div[3]/div[1]/div/span[1]/em",
+    "productName": "//*[@id=\"content\"]/div[1]/div[1]/div[2]/div[1]/h2",
+    "originPrice": "//*[@id=\"content\"]/div[1]/div[1]/div[2]/div[2]/div[1]/div/span[2]/em",
+    "salePrice": "//*[@id=\"content\"]/div[1]/div[1]/div[2]/div[2]/div[1]/div/span[1]/em",
     "discountPercent": "//*[@id=\"content\"]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/span"
   },
   "ssg": {
