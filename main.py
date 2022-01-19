@@ -11,37 +11,61 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 class ShoppingDetail:
     def __init__(self):
+        # Chrome WebDriver Options
         self.options = webdriver.ChromeOptions()
+
+        # headless & etc
         self.options.add_argument("headless")
         self.options.add_argument('window-size=1920x1080')
         self.options.add_argument("disable-gpu")
+
+        # bypass detection
         self.options.add_argument(
             "user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36")
+
+        # driver definition
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=self.options)
+
+        # 60sec wait
         self.wait = WebDriverWait(self.driver, 60)
+
+        # target.json load
         self.target = json.load(open("target.json"))
+
+        # conf.jons load
         self.conf = json.load(open("conf.json"))
 
     def detail(self):
+        # global 4 exception
         global mall
+        # redefining 4 convenience
         driver = self.driver
         wait = self.wait
         conf = self.conf
         target = self.target
-        count = 1
+
+        # dictionary 4 output.json
         d = {}
+
+        # defining 4 tqdm
         t = tq.trange(1, len(target))
+
         for i, _ in zip(target, t):
             try:
+                # target mall, url
                 mall = target[i]["target"]
                 url = conf[mall]["url"] + target[i]["product_id"]
 
+                # tqdm message
                 t.set_description("[Current target : %s]" % mall)
                 t.refresh()
 
                 driver.get(url)
+
                 product_name = wait.until(EC.presence_of_element_located((By.XPATH, conf[mall]["productName"]))).text
                 origin_price = driver.find_element(By.XPATH, conf[mall]["originPrice"]).text
+
+                # For shopping malls that do not offer discounts
                 if conf[mall]["salePrice"] == "":
                     sale_price = None
                 else:
@@ -50,12 +74,16 @@ class ShoppingDetail:
                     discount_percent = None
                 else:
                     discount_percent = driver.find_element(By.XPATH, conf[mall]["discountPercent"]).text
-                d[count] = {"target": mall, "url": url, "productName": product_name, "originPrice": origin_price,
+
+                # adding data to dictionary
+                d[i] = {"target": mall, "url": url, "productName": product_name, "originPrice": origin_price,
                             "salePrice": sale_price, "discountPercent": discount_percent}
-                count += 1
+
+            # If the element you are looking for is not found or the page does not exist
             except NoSuchElementException or TimeoutException:
-                count += 1
                 print(mall, " Error")
+
+        # ensure_ascii = False -> The letters are printed as they are. (To prevent cracking of Korean letters.)
         json.dump(d, open("output.json", "w"), ensure_ascii=False)
 
 
