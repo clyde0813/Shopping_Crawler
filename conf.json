@@ -22,16 +22,16 @@
   },
   "gsshop": {
     "productName": "title",
-    "jsonRegex": "\"prc\":(.*?),\"gftExistFlg\"",
+    "jsonRegex": "{\"prc\":(.*?),\"gftExistFlg\"",
     "originPrice": "minPrc",
     "salePrice": "salePrc",
     "discountPercent": "dcRate"
   },
   "tmon": {
     "productName": "title",
-    "jsonRegex": "\"priceInfo\":(.*?),\"priceMeta\"",
+    "jsonRegex": "\"discountPrice\":(.*?),\"dealMax\"",
     "originPrice": "originalPrice",
-    "salePrice": "discountRate",
+    "salePrice": "price",
     "discountPercent": "discountRate"
   },
   "skstoa": {
