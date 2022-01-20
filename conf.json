@@ -1,114 +1,44 @@
 {
   "interpark": {
-    "url": "https://shopping.interpark.com/product/productInfo.do?prdNo=",
-    "productName": "//*[@id=\"productName\"]/span[2]",
-    "originPrice": "//*[@id=\"priceWrap\"]/div[1]/span[1]/em",
-    "salePrice": "//*[@id=\"priceWrap\"]/div[2]/span[1]/em",
-    "discountPercent": "//*[@id=\"productPrice\"]/span/em"
+    "productName": "title",
+    "jsonRegex": "var __EGS_DATAOBJ=(.*?);",
+    "originPrice": "sale_price",
+    "salePrice": "item_price",
+    "discountPercent": ""
   },
   "11st": {
-    "url": "https://www.11st.co.kr/products/",
-    "productName": "//*[@id=\"layBodyWrap\"]/div/div[1]/div[2]/div/div[1]/div[2]/div[2]/div[3]/h1",
-    "originPrice": "//*[@id=\"layBodyWrap\"]/div/div[1]/div[2]/div/div[1]/div[2]/div[2]/div[4]/div/div/ul/li/dl[2]/dd/span[1]",
-    "salePrice": "//*[@id=\"layBodyWrap\"]/div/div[1]/div[2]/div/div[1]/div[2]/div[2]/div[4]/div/div/ul/li/dl[1]/dd/strong/span[1]",
-    "discountPercent": "//*[@id=\"layBodyWrap\"]/div/div[1]/div[2]/div/div[1]/div[2]/div[2]/div[4]/div/div/dl/dd/span[1]"
-  },
-  "g9": {
-    "url": "https://www.g9.co.kr/Display/VIP/Index/",
-    "productName": "//*[@id=\"subjText4\"]",
-    "originPrice": "//*[@id=\"sDPrice2\"]",
-    "salePrice": "",
+    "productName": "title",
+    "jsonRegex": "var productPrdInfo = (.*?);",
+    "originPrice": "selPrc",
+    "salePrice": "finalDscPrc",
     "discountPercent": ""
   },
   "wemakeprice": {
-    "url": "https://front.wemakeprice.com/deal/",
-    "productName": "//*[@id=\"_infoDescription\"]/div[1]/h3",
-    "originPrice": "//*[@id=\"_infoDescription\"]/div[3]/div[1]/div/strong/em",
-    "salePrice": "//*[@id=\"_infoDescription\"]/div[3]/div[2]/div/span[2]/strong",
-    "discountPercent": ""
+    "productName": "title",
+    "jsonRegex": ",\"sale\":(.*?),\"shipDispYn\"",
+    "originPrice": "originPrice",
+    "salePrice": "salePrice",
+    "discountPercent": "discountRate"
   },
   "gsshop": {
-    "url": "https://with.gsshop.com/prd/prd.gs?prdid=",
-    "productName": "//*[@id=\"wrap\"]/div/div/div[1]/div[3]/div[1]/p[1]",
-    "originPrice": "//*[@id=\"wrap\"]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[1]/del",
-    "salePrice": "//*[@id=\"wrap\"]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/span[2]/ins/strong",
-    "discountPercent": "//*[@id=\"wrap\"]/div/div/div[1]/div[3]/div[2]/div[1]/div/div[2]/span[1]/em"
+    "productName": "title",
+    "jsonRegex": "\"prc\":(.*?),\"gftExistFlg\"",
+    "originPrice": "minPrc",
+    "salePrice": "salePrc",
+    "discountPercent": "dcRate"
   },
   "tmon": {
-    "url": "https://www.tmon.co.kr/deal/",
-    "productName": "//*[@id=\"view-default-scene-default\"]/section[1]/div[3]/article[1]/div[2]/h2",
-    "originPrice": "//*[@id=\"view-default-scene-default\"]/section[1]/div[3]/article[1]/div[3]/div/span[2]/del",
-    "salePrice": "//*[@id=\"view-default-scene-default\"]/section[1]/div[3]/article[1]/div[3]/p[1]/strong",
-    "discountPercent": ""
-  },
-  "cjonstyle": {
-    "url": "https://display.cjonstyle.com/p/mocode/",
-    "productName": "//*[@id=\"content\"]/div[2]/div[1]/div[2]/div[2]/div[1]/h3",
-    "originPrice": "//*[@id=\"content\"]/div[2]/div[1]/div[2]/div[2]/div[1]/div[1]/span/span[2]/strong",
-    "salePrice": "//*[@id=\"content\"]/div[2]/div[1]/div[2]/div[2]/div[1]/div[1]/span/strong",
-    "discountPercent": "//*[@id=\"content\"]/div[2]/div[1]/div[2]/div[2]/div[1]/div[1]/span/span[1]/strong"
+    "productName": "title",
+    "jsonRegex": "\"priceInfo\":(.*?),\"priceMeta\"",
+    "originPrice": "originalPrice",
+    "salePrice": "discountRate",
+    "discountPercent": "discountRate"
   },
   "skstoa": {
-    "url": "https://www.skstoa.com/display/goods/",
-    "productName": "//*[@id=\"goodsView\"]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]",
-    "originPrice": "//*[@id=\"goodsView\"]/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/p[3]",
-    "salePrice": "//*[@id=\"goodsView\"]/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/p[2]/strong",
-    "discountPercent": "//*[@id=\"goodsView\"]/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/p[1]"
-  },
-  "emart": {
-    "url": "http://emart.ssg.com/item/itemView.ssg?itemId=",
-    "productName": "//*[@id=\"content\"]/div[1]/div[1]/div[2]/div[1]/h2",
-    "originPrice": "//*[@id=\"content\"]/div[1]/div[1]/div[2]/div[2]/div[1]/div/span[2]/em",
-    "salePrice": "//*[@id=\"content\"]/div[1]/div[1]/div[2]/div[2]/div[1]/div/span[1]/em",
-    "discountPercent": "//*[@id=\"content\"]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/span"
-  },
-  "ssg": {
-    "url": "http://department.ssg.com/item/dealItemView.ssg?itemId=",
-    "productName": "//*[@id=\"container_sd\"]/div/div[2]/div[1]/div[2]/div[1]/h2",
-    "originPrice": "//*[@id=\"container_sd\"]/div/div[2]/div[1]/div[2]/div[2]/div[1]/div/span/em",
-    "salePrice": "",
-    "discountPercent": ""
-  },
-  "auction": {
-    "url": "http://itempage3.auction.co.kr/DetailView.aspx?itemno=",
-    "productName": "//*[@id=\"frmMain\"]/h1",
-    "originPrice": "//*[@id=\"ucItemPrice_hdivPrice\"]",
-    "salePrice": "//*[@id=\"frmMain\"]/div[4]/div[1]/div/strong",
-    "discountPercent": "//*[@id=\"ucItemPrice_hdivDiscountRate\"]"
-  },
-  "gmarket": {
-    "url": "http://item.gmarket.co.kr/Item?goodscode=",
-    "productName": "//*[@id=\"itemcase_basic\"]/div[1]/h1",
-    "originPrice": "//*[@id=\"itemcase_basic\"]/div[1]/p/span/span",
-    "salePrice": "//*[@id=\"itemcase_basic\"]/div[1]/p/span/strong",
-    "discountPercent": ""
-  },
-  "lotteon": {
-    "url": "https://www.lotteon.com/p/product/",
-    "productName": "//*[@id=\"stickyTopParent\"]/div[2]/div[1]/div[3]/h1",
-    "originPrice": "//*[@id=\"stickyTopParent\"]/div[2]/div[2]/div/div[1]/div/span",
-    "salePrice": "//*[@id=\"stickyTopParent\"]/div[2]/div[2]/div/div[2]/div/span",
-    "discountPercent": "//*[@id=\"stickyTopParent\"]/div[2]/div[2]/div/div[2]/div/span[1]"
-  },
-  "galleria": {
-    "url": "https://www.galleria.co.kr/goods/initDetailGoods.action?goods_no=",
-    "productName": "//*[@id=\"content\"]/div/div[1]/div[3]/div[1]/div[2]",
-    "originPrice": "//*[@id=\"content\"]/div/div[1]/div[3]/div[1]/div[3]/dl/dd/div[2]/em[1]",
-    "salePrice": "//*[@id=\"content\"]/div/div[1]/div[3]/div[1]/div[3]/dl/dd",
-    "discountPercent": "//*[@id=\"content\"]/div/div[1]/div[3]/div[1]/div[3]/dl/dd/span/b"
-  },
-  "lotteimall": {
-    "url": "https://www.lotteimall.com/goods/viewGoodsDetail.lotte?goods_no=",
-    "productName": "//*[@id=\"contents\"]/div[2]/div[1]/div[1]/div[2]/h3/span[2]",
-    "originPrice": "//*[@id=\"contents\"]/div[2]/div[1]/div[1]/div[2]/div[2]/div[1]/div/span/span",
-    "salePrice": "//*[@id=\"contents\"]/div[2]/div[1]/div[1]/div[2]/div[2]/div[1]/div/div/em/span[1]",
-    "discountPercent" : "//*[@id=\"contents\"]/div[2]/div[1]/div[1]/div[2]/div[2]/div[1]/div/div/em/span[1]"
-  },
-  "coupang": {
-    "url": "https://www.coupang.com/vp/products/",
-    "productName": "//*[@id=\"contents\"]/div[1]/div/div[3]/div[3]/h2",
-    "originPrice": "//*[@id=\"contents\"]/div[1]/div/div[3]/div[5]/div[1]/div/div[1]/span[2]",
-    "salePrice": "//*[@id=\"contents\"]/div[1]/div/div[3]/div[5]/div[1]/div/div[2]/span[1]/strong",
-    "discountPercent": "//*[@id=\"contents\"]/div[1]/div/div[3]/div[5]/div[1]/div/div[1]/span[1]"
+    "productName": "description",
+    "originPrice": "#goodsView > div.goods_upper.clearfix > div.right > div.right_cont > div.cont_tit > div.lower.clearfix > div.l_part > p.origin",
+    "salePrice": "#goodsView > div.goods_upper.clearfix > div.right > div.right_cont > div.cont_tit > div.lower.clearfix > div.l_part > p.price > strong",
+    "discountPercent": "#goodsView > div.goods_upper.clearfix > div.right > div.right_cont > div.cont_tit > div.lower.clearfix > div.l_part > p.sale",
+    "originPrice2": "#contents > div:nth-child(2) > div.goods_upper.clearfix > div.right > div.right_cont > div.cont_tit > div.lower.clearfix > div > p > strong"
   }
 }

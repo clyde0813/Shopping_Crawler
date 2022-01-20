@@ -1,99 +1,116 @@
-import json
+import os
+import sys
+
 import tqdm as tq
-from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException, TimeoutException
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
-from webdriver_manager.chrome import ChromeDriverManager
+from bs4 import BeautifulSoup as bs
+import requests
+import re
+import json
+import time
+import math
+import threading
 
 
 class ShoppingDetail:
     def __init__(self):
-        # Chrome WebDriver Options
-        self.options = webdriver.ChromeOptions()
-
-        # headless & etc
-        self.options.add_argument("headless")
-        self.options.add_argument('window-size=1920x1080')
-        self.options.add_argument("disable-gpu")
-
         # bypass detection
-        self.options.add_argument(
-            "user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36")
-
-        # driver definition
-        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=self.options)
-
-        # 60sec wait
-        self.wait = WebDriverWait(self.driver, 30)
+        self.headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
 
         # target.json load
         self.target = json.load(open("target.json"))
-
         # conf.jons load
         self.conf = json.load(open("conf.json"))
 
     def detail(self):
-        # 4 exception
         global mall, url
+
         # redefining 4 convenience
-        driver = self.driver
-        wait = self.wait
-        conf = self.conf
         target = self.target
+        conf = self.conf
+        headers = self.headers
 
         # dictionary 4 output.json
         d = {}
         d_error = {}
 
         # defining 4 tqdm
-        t = tq.trange(1, len(target))
+        t = range(len(target))
 
-        for i, _ in zip(target, t):
-            try:
-                # target mall, url
-                mall = target[i]["target"]
-                url = conf[mall]["url"] + target[i]["product_id"]
+        for i in t:
+            # try:
+            # target mall, url
+            i = str(i)
+            mall = target[i]["target"]
+            url = target[i]["url"]
+            print(mall, url)
+            html = requests.get(url, headers=headers).text
+            bsObject = bs(html, "lxml")
 
-                # tqdm message
-                t.set_description("[Current target : %s]" % mall)
-                t.refresh()
+            product_name = bsObject.find("meta", {"property": "og:" + conf[mall]['productName'] + ""})['content']
 
-                driver.get(url)
+            data = re.search(conf[mall]['jsonRegex'], html, re.S).group(1)
+            json_data = json.loads(data)
+            origin_price = json_data[conf[mall]['originPrice']]
+            sale_price = json_data[conf[mall]['salePrice']]
+            if origin_price == sale_price and conf[mall]['discountPercent'] == "":
+                discount_percent = None
+                sale_price = None
+            elif origin_price != sale_price and conf[mall]['discountPercent'] == "":
+                discount_percent = math.trunc(100 * (1 - (int(sale_price) / int(origin_price))))
+            elif origin_price is None and sale_price is not None:
+                origin_price = sale_price
+                sale_price = None
+                discount_percent = None
+            else:
+                discount_percent = json_data[conf[mall]['discountPercent']]
 
-                product_name = wait.until(EC.presence_of_element_located((By.XPATH, conf[mall]["productName"]))).text
-                origin_price = driver.find_element(By.XPATH, conf[mall]["originPrice"]).text
-
-                # For shopping malls that do not offer discounts
-                if conf[mall]["salePrice"] == "":
-                    sale_price = None
-                else:
-                    sale_price = driver.find_element(By.XPATH, conf[mall]["salePrice"]).text
-                if conf[mall]["discountPercent"] == "":
-                    discount_percent = None
-                else:
-                    discount_percent = driver.find_element(By.XPATH, conf[mall]["discountPercent"]).text
-
-                # adding data to dictionary
-                d[i] = {"target": mall, "url": url, "productName": product_name, "originPrice": origin_price,
-                        "salePrice": sale_price, "discountPercent": discount_percent}
+            # adding data to dictionary
+            d[i] = {"index": i, "target": mall, "url": url, "productName": product_name, "originPrice": origin_price,
+                    "salePrice": sale_price, "discountPercent": discount_percent}
 
             # If the element you are looking for is not found or the page does not exist
-            except NoSuchElementException:
-                d_error[i] = {"reason": "NoSuchElementException", "target": mall,
-                              "product_id": target[i]["product_id"], "url": url}
-                print("\n", mall, " : No Such Element Exception")
-            except TimeoutException:
-                d_error[i] = {"reason": "TimeoutException", "target": mall,
-                              "product_id": target[i]["product_id"], "url": url}
-                print("\n", mall, " : Timeout Exception")
+            # except Exception as e:
+            #     d_error[i] = {"reason": e, "target": mall, "url": url}
+            #     print("\n", mall, " : ", e)
 
-        # ensure_ascii = False -> The letters are printed as they are. (To prevent cracking of Korean letters.)
-        json.dump(d, open("output.json", "w"), ensure_ascii=False)
+            # ensure_ascii = False -> The letters are printed as they are. (To prevent cracking of Korean letters.)
+        json.dump(d, open("output" + ".json", "w"), ensure_ascii=False)
         json.dump(d_error, open("error.json", "w"), ensure_ascii=False)
 
+    # def json_combine(self):
+    #     files = ['5.json', '4.json', '4.json', '3.json', '2.json', '1.json']
+    #     z = {}
+    #     for i in files:
+    #         z = json.load(open(i)) | z
+    #
+    #     json.dump(z, open('output.json', 'w'), ensure_ascii=False)
+    #     for i in files:
+    #         if os.path.isfile(i):
+    #             os.remove(i)
 
+    # def run(self, object):
+    #     target = self.target
+    #     a = 11 + len(target) // 5
+    #     th1 = threading.Thread(target=object.detail, args=("1", 11, a))
+    #     th2 = threading.Thread(target=object.detail, args=("2", a, 2 * a))
+    #     th3 = threading.Thread(target=object.detail, args=("3", 2 * a, 3 * a))
+    #     th4 = threading.Thread(target=object.detail, args=("4", 3 * a, 4 * a))
+    #     th5 = threading.Thread(target=object.detail, args=("5", 4 * a, 5 * a))
+    #     th1.start()
+    #     th2.start()
+    #     th3.start()
+    #     th4.start()
+    #     th5.start()
+    #     th1.join()
+    #     th2.join()
+    #     th3.join()
+    #     th4.join()
+    #     th5.join()
+    #     # self.json_combine()
+
+
+start_time = time.time()
 shop = ShoppingDetail()
 shop.detail()
+print(time.time() - start_time)
