@@ -1,1 +1,14 @@
-{}
+{
+  "11": {
+    "target": "11st",
+    "url": "https://www.11st.co.kr/products/2217118240",
+    "error": "'NoneType' object has no attribute 'group'",
+    "status_code": null
+  },
+  "41": {
+    "target": "tmon",
+    "url": "http://www.tmon.co.kr/deal/9615230994",
+    "error": "'NoneType' object has no attribute 'group'",
+    "status_code": null
+  }
+}

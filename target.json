@@ -402,5 +402,45 @@
   "100": {
     "target": "lotteimall",
     "url": "https://www.lotteimall.com/goods/viewGoodsDetail.lotte?goods_no=1245417640"
+  },
+  "101": {
+    "target": "akmall",
+    "url": "https://www.akmall.com/goods/GoodsDetail.do?goods_id=84990345"
+  },
+  "102": {
+    "target": "akmall",
+    "url": "https://www.akmall.com/goods/GoodsDetail.do?goods_id=84991475"
+  },
+  "103": {
+    "target": "akmall",
+    "url": "https://www.akmall.com/goods/GoodsDetail.do?goods_id=108941936"
+  },
+  "104": {
+    "target": "akmall",
+    "url": "https://www.akmall.com/goods/GoodsDetail.do?goods_id=108688070"
+  },
+  "105": {
+    "target": "akmall",
+    "url": "https://www.akmall.com/goods/GoodsDetail.do?goods_id=108676246"
+  },
+  "106": {
+    "target": "akmall",
+    "url": "https://www.akmall.com/goods/GoodsDetail.do?goods_id=109702009"
+  },
+  "107": {
+    "target": "akmall",
+    "url": "https://www.akmall.com/goods/GoodsDetail.do?goods_id=107030357"
+  },
+  "108": {
+    "target": "akmall",
+    "url": "https://www.akmall.com/goods/GoodsDetail.do?goods_id=104388495"
+  },
+  "109": {
+    "target": "akmall",
+    "url": "https://www.akmall.com/goods/GoodsDetail.do?goods_id=104133610"
+  },
+  "110": {
+    "target": "akmall",
+    "url": "https://www.akmall.com/goods/GoodsDetail.do?goods_id=101220951"
   }
 }

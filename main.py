@@ -27,25 +27,12 @@ class ShoppingDetail:
         self.conf = json.load(open("conf.json"))
 
     def text_filter(self, o, s, d):
-        if type(o) is int or float:
-            o = o
-        elif o is not None:
-            o = int(o.replace(",",
-                              "").replace("원", "").replace("'", ""))
-        else:
-            o = None
-        if type(s) is int or float:
-            s = s
-        elif s is not None:
-            s = int(s.replace(",", "").replace("원", "").replace("'", ""))
-        else:
-            s = None
-        if type(d) is int or float:
-            d = d
-        elif d is not None:
-            d = int(d.replace("%", "").replace("'", ""))
-        else:
-            d = None
+        if type(o) is str:
+            o = int(o.replace(",", "").replace("원", ""))
+        if type(s) is str:
+            s = int(s.replace(",", "").replace("원", ""))
+        if type(d) is str:
+            d = int(d.replace("%", ""))
         return o, s, d
 
     def normal_crawl(self, i, mall, url, headers, conf, d):
@@ -57,7 +44,11 @@ class ShoppingDetail:
         except:
             product_name = bsObject.find(conf[mall]['productName']).text
         data = re.search(conf[mall]['jsonRegex'], html, re.S).group(1)
-        json_data = json.loads(data)
+        try:
+            json_data = json.loads(data)
+        except:
+            data = data.replace("//Optional", "") + "}"
+            json_data = json.loads(data)
         origin_price = json_data[conf[mall]['originPrice']]
         sale_price = json_data[conf[mall]['salePrice']]
         if origin_price == sale_price:
@@ -166,7 +157,7 @@ class ShoppingDetail:
         d_error = {}
 
         # defining 4 tqdm
-        progress_bar = tq.tqdm(t, desc=file_name)
+        progress_bar = tq.tqdm(t, position=0, desc=file_name)
         for i, _ in zip(t, progress_bar):
             progress_bar.refresh()
             i = str(i)
@@ -188,20 +179,21 @@ class ShoppingDetail:
                     self.normal_crawl(i, mall, url, headers, conf, d)
             except Exception as e:
                 d_error[i] = {"target": mall, "url": url, "error": str(e), "status_code": status_code}
+
         # ensure_ascii = False -> The letters are printed as they are. (To prevent cracking of Korean letters.)
         json.dump(d, open(file_name + ".json", "w"), ensure_ascii=False)
         json.dump(d_error, open(file_name + "error.json", "w"), ensure_ascii=False)
 
     def json_combine(self):
         z = {}
-        for i in range(20, 0, -1):
+        for i in range(15, 0, -1):
             i = str(i) + ".json"
             z = json.load(open(i)) | z
             if os.path.isfile(i):
                 os.remove(i)
         json.dump(z, open('output.json', 'w'), ensure_ascii=False)
         z = {}
-        for i in range(20, 0, -1):
+        for i in range(15, 0, -1):
             i = str(i) + "error.json"
             z = json.load(open(i)) | z
             if os.path.isfile(i):
@@ -209,7 +201,8 @@ class ShoppingDetail:
         json.dump(z, open('error.json', 'w'), ensure_ascii=False)
 
     def run(self, object):
-        a = len(self.target) // 20
+        a = len(self.target) // 15
+        b = len(self.target) - (15 * a)
         th1 = Process(target=object.detail, args=("1", range(0, a)))
         th2 = Process(target=object.detail, args=("2", range(a, 2 * a)))
         th3 = Process(target=object.detail, args=("3", range(2 * a, 3 * a)))
@@ -224,12 +217,7 @@ class ShoppingDetail:
         th12 = Process(target=object.detail, args=("12", range(11 * a, 12 * a)))
         th13 = Process(target=object.detail, args=("13", range(12 * a, 13 * a)))
         th14 = Process(target=object.detail, args=("14", range(13 * a, 14 * a)))
-        th15 = Process(target=object.detail, args=("15", range(14 * a, 15 * a)))
-        th16 = Process(target=object.detail, args=("16", range(15 * a, 16 * a)))
-        th17 = Process(target=object.detail, args=("17", range(16 * a, 17 * a)))
-        th18 = Process(target=object.detail, args=("18", range(17 * a, 18 * a)))
-        th19 = Process(target=object.detail, args=("19", range(18 * a, 19 * a)))
-        th20 = Process(target=object.detail, args=("20", range(19 * a, 20 * a)))
+        th15 = Process(target=object.detail, args=("15", range(14 * a, 15 * a + b)))
         th1.start()
         th2.start()
         th3.start()
@@ -245,11 +233,7 @@ class ShoppingDetail:
         th13.start()
         th14.start()
         th15.start()
-        th16.start()
-        th17.start()
-        th18.start()
-        th19.start()
-        th20.start()
+
         th1.join()
         th2.join()
         th3.join()
@@ -265,11 +249,6 @@ class ShoppingDetail:
         th13.join()
         th14.join()
         th15.join()
-        th16.join()
-        th17.join()
-        th18.join()
-        th19.join()
-        th20.join()
         self.json_combine()
 
 

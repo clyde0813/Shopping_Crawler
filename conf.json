@@ -76,5 +76,12 @@
     "originPrice": "sale_price:(.*?),",
     "salePrice": "price",
     "discountPercent": ""
+  },
+  "akmall": {
+    "productName": "title",
+    "jsonRegex" : "\"product\": (.*?)}",
+    "originPrice": "unit_price",
+    "salePrice": "unit_sale_price",
+    "discountPercent": ""
   }
 }
