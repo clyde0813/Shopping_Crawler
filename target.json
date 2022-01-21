@@ -322,5 +322,85 @@
   "80": {
     "target": "gmarket",
     "url": "http://item.gmarket.co.kr/Item?goodsCode=2140254993"
+  },
+  "81": {
+    "target": "galleria",
+    "url": "https://www.galleria.co.kr/goods/initDetailGoods.action?target=_self&goods_no=2108158740"
+  },
+  "82": {
+    "target": "galleria",
+    "url": "https://www.galleria.co.kr/goods/initDetailGoods.action?target=_self&goods_no=2111298109"
+  },
+  "83": {
+    "target": "galleria",
+    "url": "https://www.galleria.co.kr/goods/initDetailGoods.action?target=_self&goods_no=2112348001"
+  },
+  "84": {
+    "target": "galleria",
+    "url": "https://www.galleria.co.kr/goods/initDetailGoods.action?target=_self&goods_no=2101761754"
+  },
+  "85": {
+    "target": "galleria",
+    "url": "https://www.galleria.co.kr/goods/initDetailGoods.action?target=_self&goods_no=2101763349"
+  },
+  "86": {
+    "target": "galleria",
+    "url": "https://www.galleria.co.kr/goods/initDetailGoods.action?target=_self&goods_no=2110284161"
+  },
+  "87": {
+    "target": "galleria",
+    "url": "https://www.galleria.co.kr/goods/initDetailGoods.action?target=_self&goods_no=2201379852"
+  },
+  "88": {
+    "target": "galleria",
+    "url": "https://www.galleria.co.kr/goods/initDetailGoods.action?target=_self&goods_no=2004193229"
+  },
+  "89": {
+    "target": "galleria",
+    "url": "https://www.galleria.co.kr/goods/initDetailGoods.action?target=_self&goods_no=2012697907"
+  },
+  "90": {
+    "target": "galleria",
+    "url": "https://www.galleria.co.kr/goods/initDetailGoods.action?target=_self&goods_no=2108152699"
+  },
+  "91": {
+    "target": "lotteimall",
+    "url": "https://www.lotteimall.com/goods/viewGoodsDetail.lotte?goods_no=12687608"
+  },
+  "92": {
+    "target": "lotteimall",
+    "url": "https://www.lotteimall.com/goods/viewGoodsDetail.lotte?goods_no=12708503"
+  },
+  "93": {
+    "target": "lotteimall",
+    "url": "https://www.lotteimall.com/goods/viewGoodsDetail.lotte?goods_no=1570810076"
+  },
+  "94": {
+    "target": "lotteimall",
+    "url": "https://www.lotteimall.com/goods/viewGoodsDetail.lotte?goods_no=12662830"
+  },
+  "95": {
+    "target": "lotteimall",
+    "url": "https://www.lotteimall.com/goods/viewGoodsDetail.lotte?goods_no=12664345"
+  },
+  "96": {
+    "target": "lotteimall",
+    "url": "https://www.lotteimall.com/goods/viewGoodsDetail.lotte?goods_no=1882220684"
+  },
+  "97": {
+    "target": "lotteimall",
+    "url": "https://www.lotteimall.com/goods/viewGoodsDetail.lotte?goods_no=12494923"
+  },
+  "98": {
+    "target": "lotteimall",
+    "url": "https://www.lotteimall.com/goods/viewGoodsDetail.lotte?goods_no=1174171088"
+  },
+  "99": {
+    "target": "lotteimall",
+    "url": "https://www.lotteimall.com/goods/viewGoodsDetail.lotte?goods_no=1602362539"
+  },
+  "100": {
+    "target": "lotteimall",
+    "url": "https://www.lotteimall.com/goods/viewGoodsDetail.lotte?goods_no=1245417640"
   }
 }

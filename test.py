@@ -179,13 +179,32 @@ start = time.time()
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
 html = requests.get(
-    "http://item.gmarket.co.kr/Item?goodsCode=2140254993",
+    "https://www.lotteimall.com/goods/viewGoodsDetail.lotte?goods_no=1174171088&grbyEndDtime=20220121235900",
     headers=headers).text
 bsObject = bs(html, "lxml")
-print(html)
-print(bsObject.find("meta", {"property": "og:description"})["content"])
+print(bsObject.find("meta", {"property": "og:title"})['content'])
+# print(html)
+try:
+    data = re.search(r'sale_price:(.*?),', html, re.S).group(1)
+    print(data)
+finally:
+    print(bsObject.find("meta", {"property": "og:price"})['content'])
 
-data = re.search(r'OrderSet.BaseDiscountPrice = (.*?);', html, re.S).group(1)
-data2 = re.search(r'OrderSet.SellPrice = (.*?).0000;', html, re.S).group(1)
-print(data, data2)
 print(time.time() - start)
+target = json.load(open('target.json'))
+start = time.time()
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
+for i in range(91, 101):
+    html = requests.get(
+        target[str(i)]['url'],
+        headers=headers).text
+    bsObject = bs(html, "lxml")
+    print(bsObject.find("meta", {"property": "og:title"})['content'])
+    # print(html)
+    data = re.search(r'sale_price:(.*?),', html, re.S).group(1)
+    print(data)
+    print(bsObject.find("meta", {"property": "og:price"})['content'])
+
+
+    print(time.time() - start)

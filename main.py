@@ -52,7 +52,10 @@ class ShoppingDetail:
         # target mall, url
         html = requests.get(url, headers=headers).text
         bsObject = bs(html, "lxml")
-        product_name = bsObject.find("meta", {"property": "og:" + conf[mall]['productName'] + ""})['content']
+        try:
+            product_name = bsObject.find("meta", {"property": "og:" + conf[mall]['productName']})['content']
+        except:
+            product_name = bsObject.find(conf[mall]['productName']).text
         data = re.search(conf[mall]['jsonRegex'], html, re.S).group(1)
         json_data = json.loads(data)
         origin_price = json_data[conf[mall]['originPrice']]
@@ -70,7 +73,7 @@ class ShoppingDetail:
             discount_percent = json_data[conf[mall]['discountPercent']]
         text_filter = self.text_filter(origin_price, sale_price, discount_percent)
         # adding data to dictionary
-        d[i] = {"index": i, "target": mall, "url": url, "productName": product_name,
+        d[i] = {"index": int(i), "target": mall, "url": url, "productName": product_name,
                 "originPrice": text_filter[0],
                 "salePrice": text_filter[1], "discountPercent": text_filter[2]}
 
@@ -99,7 +102,7 @@ class ShoppingDetail:
         # adding data to dictionary
         text_filter = self.text_filter(origin_price, sale_price, discount_percent)
         # adding data to dictionary
-        d[i] = {"index": i, "target": mall, "url": url, "productName": product_name,
+        d[i] = {"index": int(i), "target": mall, "url": url, "productName": product_name,
                 "originPrice": text_filter[0],
                 "salePrice": text_filter[1], "discountPercent": text_filter[2]}
 
@@ -108,7 +111,7 @@ class ShoppingDetail:
     def gmarket_crawl(self, i, mall, url, headers, conf, d):
         html = requests.get(url, headers=headers).text
         bsObject = bs(html, "lxml")
-        product_name = bsObject.find("meta", {"property": "og:" + conf[mall]['productName'] + ""})['content']
+        product_name = bsObject.find("meta", {"property": "og:" + conf[mall]['productName']})['content']
         origin_price = re.search(conf[mall]['originPrice'], html, re.S).group(1)
         sale_price = re.search(conf[mall]['salePrice'], html, re.S).group(1)
         discount_percent = None
@@ -119,10 +122,37 @@ class ShoppingDetail:
             discount_percent = math.trunc(100 * (1 - (int(sale_price) / int(origin_price))))
         text_filter = self.text_filter(origin_price, sale_price, discount_percent)
         # adding data to dictionary
-        d[i] = {"index": i, "target": mall, "url": url, "productName": product_name,
+        d[i] = {"index": int(i), "target": mall, "url": url, "productName": product_name,
                 "originPrice": text_filter[0],
                 "salePrice": text_filter[1], "discountPercent": text_filter[2]}
 
+        return d[i]
+
+    def lotteimall_crawl(self, i, mall, url, headers, conf, d):
+        html = requests.get(url, headers=headers).text
+        bsObject = bs(html, "lxml")
+        product_name = bsObject.find("meta", {"property": "og:" + conf[mall]["productName"]})['content']
+        origin_price = re.search(conf[mall]["originPrice"], html, re.S).group(1)
+        sale_price = bsObject.find("meta", {"property": "og:" + conf[mall]["salePrice"]})['content']
+        if origin_price == "0":
+            origin_price = sale_price
+            sale_price = None
+            discount_percent = None
+        elif origin_price == sale_price:
+            sale_price = None
+            discount_percent = None
+        else:
+            try:
+                discount_percent = math.trunc(100 * (1 - (int(sale_price) / int(origin_price))))
+            except:
+                discount_percent = None
+            if discount_percent == 0:
+                discount_percent = None
+        # adding data to dictionary
+        text_filter = self.text_filter(origin_price, sale_price, discount_percent)
+        d[i] = {"index": int(i), "target": mall, "url": url, "productName": product_name,
+                "originPrice": text_filter[0],
+                "salePrice": text_filter[1], "discountPercent": text_filter[2]}
         return d[i]
 
     def detail(self, file_name, t):
@@ -152,6 +182,8 @@ class ShoppingDetail:
                     self.auction_crawl(i, mall, url, headers, conf, d)
                 elif mall == "gmarket":
                     self.gmarket_crawl(i, mall, url, headers, conf, d)
+                elif mall == "lotteimall":
+                    self.lotteimall_crawl(i, mall, url, headers, conf, d)
                 else:
                     self.normal_crawl(i, mall, url, headers, conf, d)
             except Exception as e:
@@ -162,14 +194,14 @@ class ShoppingDetail:
 
     def json_combine(self):
         z = {}
-        for i in range(10, 0, -1):
+        for i in range(20, 0, -1):
             i = str(i) + ".json"
             z = json.load(open(i)) | z
             if os.path.isfile(i):
                 os.remove(i)
         json.dump(z, open('output.json', 'w'), ensure_ascii=False)
         z = {}
-        for i in range(10, 0, -1):
+        for i in range(20, 0, -1):
             i = str(i) + "error.json"
             z = json.load(open(i)) | z
             if os.path.isfile(i):
@@ -177,7 +209,7 @@ class ShoppingDetail:
         json.dump(z, open('error.json', 'w'), ensure_ascii=False)
 
     def run(self, object):
-        a = len(self.target) // 10
+        a = len(self.target) // 20
         th1 = Process(target=object.detail, args=("1", range(0, a)))
         th2 = Process(target=object.detail, args=("2", range(a, 2 * a)))
         th3 = Process(target=object.detail, args=("3", range(2 * a, 3 * a)))
@@ -187,8 +219,17 @@ class ShoppingDetail:
         th7 = Process(target=object.detail, args=("7", range(6 * a, 7 * a)))
         th8 = Process(target=object.detail, args=("8", range(7 * a, 8 * a)))
         th9 = Process(target=object.detail, args=("9", range(8 * a, 9 * a)))
-        th10 = Process(target=object.detail, args=("10", range(9 * a, 10 * a + 1)))
-
+        th10 = Process(target=object.detail, args=("10", range(9 * a, 10 * a)))
+        th11 = Process(target=object.detail, args=("11", range(10 * a, 11 * a)))
+        th12 = Process(target=object.detail, args=("12", range(11 * a, 12 * a)))
+        th13 = Process(target=object.detail, args=("13", range(12 * a, 13 * a)))
+        th14 = Process(target=object.detail, args=("14", range(13 * a, 14 * a)))
+        th15 = Process(target=object.detail, args=("15", range(14 * a, 15 * a)))
+        th16 = Process(target=object.detail, args=("16", range(15 * a, 16 * a)))
+        th17 = Process(target=object.detail, args=("17", range(16 * a, 17 * a)))
+        th18 = Process(target=object.detail, args=("18", range(17 * a, 18 * a)))
+        th19 = Process(target=object.detail, args=("19", range(18 * a, 19 * a)))
+        th20 = Process(target=object.detail, args=("20", range(19 * a, 20 * a)))
         th1.start()
         th2.start()
         th3.start()
@@ -199,6 +240,16 @@ class ShoppingDetail:
         th8.start()
         th9.start()
         th10.start()
+        th11.start()
+        th12.start()
+        th13.start()
+        th14.start()
+        th15.start()
+        th16.start()
+        th17.start()
+        th18.start()
+        th19.start()
+        th20.start()
         th1.join()
         th2.join()
         th3.join()
@@ -209,6 +260,16 @@ class ShoppingDetail:
         th8.join()
         th9.join()
         th10.join()
+        th11.join()
+        th12.join()
+        th13.join()
+        th14.join()
+        th15.join()
+        th16.join()
+        th17.join()
+        th18.join()
+        th19.join()
+        th20.join()
         self.json_combine()
 
 

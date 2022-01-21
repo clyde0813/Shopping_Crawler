@@ -1,8 +1,1 @@
-{
-  "43": {
-    "target": "tmon",
-    "url": "http://www.tmon.co.kr/deal/9651815566",
-    "error": "'NoneType' object is not subscriptable",
-    "status_code": null
-  }
-}
+{}

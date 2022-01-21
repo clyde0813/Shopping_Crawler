@@ -63,5 +63,18 @@
     "originPrice": "OrderSet.SellPrice = (.*?).0000;",
     "salePrice": "OrderSet.BaseDiscountPrice = (.*?);",
     "discountPercent": ""
+  },
+  "galleria": {
+    "productName": "title",
+    "jsonRegex": "\"price\":(.*?),\"conts_divi_cd\"",
+    "originPrice": "sale_price",
+    "salePrice": "cust_sale_price",
+    "discountPercent": ""
+  },
+  "lotteimall": {
+    "productName": "title",
+    "originPrice": "sale_price:(.*?),",
+    "salePrice": "price",
+    "discountPercent": ""
   }
 }
