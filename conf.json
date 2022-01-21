@@ -40,5 +40,28 @@
     "salePrice": "#goodsView > div.goods_upper.clearfix > div.right > div.right_cont > div.cont_tit > div.lower.clearfix > div.l_part > p.price > strong",
     "discountPercent": "#goodsView > div.goods_upper.clearfix > div.right > div.right_cont > div.cont_tit > div.lower.clearfix > div.l_part > p.sale",
     "originPrice2": "#contents > div:nth-child(2) > div.goods_upper.clearfix > div.right > div.right_cont > div.cont_tit > div.lower.clearfix > div > p > strong"
+  },
+  "auction": {
+    "productName": "title",
+    "originPrice": [
+      "class",
+      "price_original",
+      "price"
+    ],
+    "salePrice": [
+      "class",
+      "price_real"
+    ],
+    "discountPercent": [
+      "class",
+      "sale"
+    ]
+  },
+  "gmarket": {
+    "productName": "description",
+    "jsonRegex": "var groupLayerItems = \\[(.*?),{\"",
+    "originPrice": "OrderSet.SellPrice = (.*?).0000;",
+    "salePrice": "OrderSet.BaseDiscountPrice = (.*?);",
+    "discountPercent": ""
   }
 }

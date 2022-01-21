@@ -26,7 +26,29 @@ class ShoppingDetail:
         # conf.jons load
         self.conf = json.load(open("conf.json"))
 
-    def normal_crawl(self, i, mall, url, conf, headers, d):
+    def text_filter(self, o, s, d):
+        if type(o) is int or float:
+            o = o
+        elif o is not None:
+            o = int(o.replace(",",
+                              "").replace("원", "").replace("'", ""))
+        else:
+            o = None
+        if type(s) is int or float:
+            s = s
+        elif s is not None:
+            s = int(s.replace(",", "").replace("원", "").replace("'", ""))
+        else:
+            s = None
+        if type(d) is int or float:
+            d = d
+        elif d is not None:
+            d = int(d.replace("%", "").replace("'", ""))
+        else:
+            d = None
+        return o, s, d
+
+    def normal_crawl(self, i, mall, url, headers, conf, d):
         # target mall, url
         html = requests.get(url, headers=headers).text
         bsObject = bs(html, "lxml")
@@ -46,52 +68,69 @@ class ShoppingDetail:
             discount_percent = None
         else:
             discount_percent = json_data[conf[mall]['discountPercent']]
-
+        text_filter = self.text_filter(origin_price, sale_price, discount_percent)
         # adding data to dictionary
         d[i] = {"index": i, "target": mall, "url": url, "productName": product_name,
-                "originPrice": origin_price,
-                "salePrice": sale_price, "discountPercent": discount_percent}
+                "originPrice": text_filter[0],
+                "salePrice": text_filter[1], "discountPercent": text_filter[2]}
 
         return d[i]
 
-    def emart_crawl(self, i, mall, url, d):
-        ua = UserAgent()
-        userAgent = ua.random
-        headers = {'User-Agent': userAgent}
-        proxies = {
-            'http': 'socks5://127.0.0.1:9050',
-            'https': 'socks5://127.0.0.1:9050'
-        }
-        html = requests.get(url, headers=headers, proxies=proxies).text
+    def auction_crawl(self, i, mall, url, headers, conf, d):
+        html = requests.get(url, headers=headers).text
         bsObject = bs(html, "lxml")
         try:
-            product_name = bsObject.find("meta", {"property": "og:title"})['content']
-            origin_price = bsObject.find("input", {"id": "sellprc"})["value"]
-            sale_price = bsObject.find("input", {"id": "sellUnitPrc"})["value"]
-
+            product_name = bsObject.find("meta", {"property": "og:" + conf[mall]['productName'] + ""})['content']
+            origin_price = bsObject.find("span", {conf[mall]["originPrice"][0]: conf[mall]["originPrice"][1]}).text
+            sale_price = bsObject.find("strong", {conf[mall]["salePrice"][0]: conf[mall]["salePrice"][1]}).text
+            discount_percent = bsObject.find("strong",
+                                             {conf[mall]["discountPercent"][0]: conf[mall]["discountPercent"][1]}).text
         except:
-            b = re.search(r'bestAmt:parseInt\(\'(.*?)\',', html, re.S).group(1)
-            origin_price = b
+            product_name = bsObject.find("meta", {"property": "og:" + conf[mall]['productName'] + ""})['content']
+            try:
+                origin_price = bsObject.find("span",
+                                             {conf[mall]["originPrice"][0]: conf[mall]["originPrice"][3]}).text.replace(
+                    "								",
+                    "").replace("\n", "")
+            except:
+                origin_price = bsObject.find("strong", {conf[mall]["salePrice"][0]: conf[mall]["salePrice"][1]}).text
             sale_price = None
             discount_percent = None
-        if origin_price == sale_price:
-            discount_percent = None
-            sale_price = None
-        elif origin_price != sale_price and origin_price or sale_price is not None:
-            discount_percent = math.trunc(100 * (1 - (int(sale_price) / int(origin_price))))
-
+        # adding data to dictionary
+        text_filter = self.text_filter(origin_price, sale_price, discount_percent)
+        # adding data to dictionary
         d[i] = {"index": i, "target": mall, "url": url, "productName": product_name,
-                "originPrice": origin_price,
-                "salePrice": sale_price, "discountPercent": discount_percent}
+                "originPrice": text_filter[0],
+                "salePrice": text_filter[1], "discountPercent": text_filter[2]}
+
+        return d[i]
+
+    def gmarket_crawl(self, i, mall, url, headers, conf, d):
+        html = requests.get(url, headers=headers).text
+        bsObject = bs(html, "lxml")
+        product_name = bsObject.find("meta", {"property": "og:" + conf[mall]['productName'] + ""})['content']
+        origin_price = re.search(conf[mall]['originPrice'], html, re.S).group(1)
+        sale_price = re.search(conf[mall]['salePrice'], html, re.S).group(1)
+        discount_percent = None
+        if origin_price == sale_price:
+            sale_price = None
+            discount_percent = None
+        elif origin_price is not sale_price and sale_price is not None:
+            discount_percent = math.trunc(100 * (1 - (int(sale_price) / int(origin_price))))
+        text_filter = self.text_filter(origin_price, sale_price, discount_percent)
+        # adding data to dictionary
+        d[i] = {"index": i, "target": mall, "url": url, "productName": product_name,
+                "originPrice": text_filter[0],
+                "salePrice": text_filter[1], "discountPercent": text_filter[2]}
+
         return d[i]
 
     def detail(self, file_name, t):
-        global mall, url
         # redefining 4 convenience
         target = self.target
         conf = self.conf
         headers = self.headers
-
+        status_code = None
         # dictionary 4 output.json
         d = {}
         d_error = {}
@@ -103,14 +142,20 @@ class ShoppingDetail:
             i = str(i)
             mall = target[i]["target"]
             url = target[i]["url"]
+            ua = UserAgent()
+            userAgent = ua.random
+            headers = {'User-Agent': userAgent}
             try:
-                if mall == 'emart':
-                    self.emart_crawl(i, mall, url, d)
+                if mall == "emart":
+                    pass
+                elif mall == "auction":
+                    self.auction_crawl(i, mall, url, headers, conf, d)
+                elif mall == "gmarket":
+                    self.gmarket_crawl(i, mall, url, headers, conf, d)
                 else:
-                    self.normal_crawl(i, mall, url, conf, headers, d)
+                    self.normal_crawl(i, mall, url, headers, conf, d)
             except Exception as e:
-                d_error[i] = {"target": mall, "url": url, "error": e}
-                pass
+                d_error[i] = {"target": mall, "url": url, "error": str(e), "status_code": status_code}
         # ensure_ascii = False -> The letters are printed as they are. (To prevent cracking of Korean letters.)
         json.dump(d, open(file_name + ".json", "w"), ensure_ascii=False)
         json.dump(d_error, open(file_name + "error.json", "w"), ensure_ascii=False)

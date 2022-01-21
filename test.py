@@ -124,26 +124,68 @@ import re
 
 
 # emart
-data = json.load(open('target.json'))
-ua = UserAgent()
-userAgent = ua.random
-headers = {'User-Agent': userAgent}
-proxies = {
-    'http': 'socks5://127.0.0.1:9050',
-    'https': 'socks5://127.0.0.1:9050'
-}
-for i in data:
-    print(data[str(int(i) + 51)]["url"])
-    print(i)
-    html = requests.get(
-        data[str(int(i) + 51)]["url"], proxies=proxies, headers=headers)
-    print(html.status_code)
-    html = html.text
-    bsObject = bs(html, "lxml")
-    try:
-        print(bsObject.find("meta", {"property": "og:title"})["content"])
-        print(bsObject.find("input", {"id": "sellUnitPrc"})["value"])
-        print(bsObject.find("input", {"id": "sellprc"})["value"])
-    except:
-        b = re.search(r'bestAmt:parseInt\(\'(.*?)\',', html, re.S).group(1)
-        print(b)
+# data = json.load(open('target.json'))
+# while True:
+#     for i in data:
+#         if int(i) + 51 < 61:
+#             ua = UserAgent()
+#             userAgent = ua.random
+#             headers = {'User-Agent': userAgent}
+#             proxies = {
+#                 'http': 'socks5://127.0.0.1:9050',
+#                 'https': 'socks5://127.0.0.1:9050'
+#             }
+#             html = requests.get(
+#                 data[str(int(i) + 51)]["url"], proxies=proxies, headers=headers)
+#             print("\n",html.status_code)
+#             html = html.text
+#             bsObject = bs(html, "lxml")
+#             try:
+#                 print(bsObject.find("meta", {"property": "og:title"})["content"])
+#                 print(bsObject.find("input", {"id": "sellUnitPrc"})["value"])
+#                 print(bsObject.find("input", {"id": "sellprc"})["value"])
+#             except:
+#                 b = re.search(r'bestAmt:parseInt\(\'(.*?)\',', html, re.S).group(1)
+#                 print(b)
+#         else:
+#             pass
+
+# target = json.load(open('target.json'))
+# start = time.time()
+# headers = {
+#     'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
+# for i in range(61, 71):
+#     html = requests.get(
+#         target[str(i)]['url'],
+#         headers=headers)
+#     print(html.status_code)
+#     html = html.text
+#     # print(html)
+#     bsObject = bs(html, "lxml")
+#     # print(html)
+#     # data = re.search(r'GroupItemList = \$.parseJSON\(\'\[(.*?),{', html, re.S).group(1)
+#     # print(bsObject.find("meta", {"property": "og:title"})['content'])
+#     try:
+#         print(bsObject.find("meta", {"property": "og:title"})["content"])
+#         print(bsObject.find("span", {"class": "price_original"}).text)
+#         print(bsObject.find("strong", {"class": "price_real"}).text)
+#         print(bsObject.find("strong", {"class": "sale"}).text)
+#     except:
+#         print(bsObject.find("strong", {"class": "price"}).text.replace("								", "").replace("\n", ""))
+#     print(time.time() - start)
+
+
+start = time.time()
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
+html = requests.get(
+    "http://item.gmarket.co.kr/Item?goodsCode=2140254993",
+    headers=headers).text
+bsObject = bs(html, "lxml")
+print(html)
+print(bsObject.find("meta", {"property": "og:description"})["content"])
+
+data = re.search(r'OrderSet.BaseDiscountPrice = (.*?);', html, re.S).group(1)
+data2 = re.search(r'OrderSet.SellPrice = (.*?).0000;', html, re.S).group(1)
+print(data, data2)
+print(time.time() - start)

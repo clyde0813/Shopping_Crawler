@@ -1,1 +1,8 @@
-{"51": {"target": "emart", "url": "http://emart.ssg.com/item/dealItemView.ssg?itemId=1000060381096&siteNo=6001&salestrNo=2034"}, "57": {"target": "emart", "url": "http://emart.ssg.com/item/itemView.ssg?itemId=1000024420023&siteNo=6001&salestrNo=2034"}, "58": {"target": "emart", "url": "http://emart.ssg.com/item/itemView.ssg?itemId=1000056766954&siteNo=6001&salestrNo=6005&click=itemMidArea02"}, "59": {"target": "emart", "url": "http://emart.ssg.com/item/itemView.ssg?itemId=1000035381242&siteNo=6001&salestrNo=6005&click=itemMidArea02"}, "60": {"target": "emart", "url": "http://emart.ssg.com/item/itemView.ssg?itemId=1000056766954&siteNo=6001&salestrNo=6005&click=itemMidArea02"}}
+{
+  "43": {
+    "target": "tmon",
+    "url": "http://www.tmon.co.kr/deal/9651815566",
+    "error": "'NoneType' object is not subscriptable",
+    "status_code": null
+  }
+}

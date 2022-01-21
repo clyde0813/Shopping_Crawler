@@ -97,7 +97,7 @@
   },
   "24": {
     "target": "wemakeprice",
-    "url": "https://front.wemakeprice.com/deal/625645116"
+    "url": "https://front.wemakeprice.com/deal/626254435"
   },
   "25": {
     "target": "wemakeprice",
@@ -242,5 +242,85 @@
   "60": {
     "target": "emart",
     "url": "http://emart.ssg.com/item/itemView.ssg?itemId=1000056766954&siteNo=6001&salestrNo=6005&click=itemMidArea02"
+  },
+  "61": {
+    "target": "auction",
+    "url": "http://itempage3.auction.co.kr/detailview.aspx?ItemNo=B814983898"
+  },
+  "62": {
+    "target": "auction",
+    "url": "http://itempage3.auction.co.kr/DetailView.aspx?itemno=C220859288"
+  },
+  "63": {
+    "target": "auction",
+    "url": "http://itempage3.auction.co.kr/DetailView.aspx?itemno=C220859288"
+  },
+  "64": {
+    "target": "auction",
+    "url": "http://itempage3.auction.co.kr/DetailView.aspx?itemno=B794447220"
+  },
+  "65": {
+    "target": "auction",
+    "url": "http://itempage3.auction.co.kr/DetailView.aspx?itemno=C492443793"
+  },
+  "66": {
+    "target": "auction",
+    "url": "http://itempage3.auction.co.kr/DetailView.aspx?itemno=B858733186"
+  },
+  "67": {
+    "target": "auction",
+    "url": "http://itempage3.auction.co.kr/DetailView.aspx?ItemNo=B659037435"
+  },
+  "68": {
+    "target": "auction",
+    "url": "http://itempage3.auction.co.kr/DetailView.aspx?itemno=C282705337"
+  },
+  "69": {
+    "target": "auction",
+    "url": "http://itempage3.auction.co.kr/DetailView.aspx?ItemNo=C307923641"
+  },
+  "70": {
+    "target": "auction",
+    "url": "http://itempage3.auction.co.kr/detailview.aspx?ItemNo=C300646280"
+  },
+  "71": {
+    "target": "gmarket",
+    "url": "http://item.gmarket.co.kr/Item?goodsCode=2304694218"
+  },
+  "72": {
+    "target": "gmarket",
+    "url": "http://item.gmarket.co.kr/Item?goodsCode=2321258775"
+  },
+  "73": {
+    "target": "gmarket",
+    "url": "http://item.gmarket.co.kr/Item?goodsCode=701004566"
+  },
+  "74": {
+    "target": "gmarket",
+    "url": "http://item.gmarket.co.kr/Item?goodsCode=1247686575"
+  },
+  "75": {
+    "target": "gmarket",
+    "url": "http://item.gmarket.co.kr/Item?goodsCode=2254368471"
+  },
+  "76": {
+    "target": "gmarket",
+    "url": "http://item.gmarket.co.kr/Item?goodsCode=1677882956"
+  },
+  "77": {
+    "target": "gmarket",
+    "url": "http://item.gmarket.co.kr/Item?goodsCode=1677882918"
+  },
+  "78": {
+    "target": "gmarket",
+    "url": "http://item.gmarket.co.kr/Item?goodsCode=1744733685"
+  },
+  "79": {
+    "target": "gmarket",
+    "url": "http://item.gmarket.co.kr/Item?goodsCode=1695176334"
+  },
+  "80": {
+    "target": "gmarket",
+    "url": "http://item.gmarket.co.kr/Item?goodsCode=2140254993"
   }
 }

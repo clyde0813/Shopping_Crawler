@@ -102,7 +102,7 @@
     "index": "11",
     "target": "11st",
     "url": "https://www.11st.co.kr/products/2217118240",
-    "productName": "[11번가] 신년맞이 설화수/헤라/프리메라 BEST 상품 모음전! Up to ~15%",
+    "productName": "[11번가] 설화수/헤라/프리메라 신년맞이 BEST 상품전! Up to ~15%",
     "originPrice": 35000,
     "salePrice": 33250,
     "discountPercent": 5
@@ -131,8 +131,8 @@
     "url": "https://www.11st.co.kr/products/3267198087",
     "productName": "[11번가] 강진착한한우1등급 구이세트(꽃등심,채끝)1kg",
     "originPrice": 98600,
-    "salePrice": 88740,
-    "discountPercent": 9
+    "salePrice": null,
+    "discountPercent": null
   },
   "15": {
     "index": "15",
@@ -156,7 +156,7 @@
     "index": "17",
     "target": "11st",
     "url": "https://www.11st.co.kr/products/2217118240",
-    "productName": "[11번가] 신년맞이 설화수/헤라/프리메라 BEST 상품 모음전! Up to ~15%",
+    "productName": "[11번가] 설화수/헤라/프리메라 신년맞이 BEST 상품전! Up to ~15%",
     "originPrice": 35000,
     "salePrice": 33250,
     "discountPercent": 5
@@ -166,9 +166,9 @@
     "target": "11st",
     "url": "https://www.11st.co.kr/products/3279883316",
     "productName": "[11번가] 노바리빙 LED 무선센서등 센서바 LED조명 무드등 자석 형광등 인테리어조명 욕실 주방",
-    "originPrice": 10500,
-    "salePrice": 8400,
-    "discountPercent": 19
+    "originPrice": 8500,
+    "salePrice": null,
+    "discountPercent": null
   },
   "19": {
     "index": "19",
@@ -192,7 +192,7 @@
     "index": "21",
     "target": "wemakeprice",
     "url": "https://front.wemakeprice.com/deal/626380327",
-    "productName": "[패션뷰티위크]오늘 밤 12시까지만 65%무제한 할인쿠폰, 골드앤 14k/18k 주얼리 모음 ▶ 구경하러가기",
+    "productName": "오늘 밤 12시까지만 65%무제한 할인쿠폰, 골드앤 14k/18k 주얼리 모음 ▶ 구경하러가기",
     "originPrice": 86200,
     "salePrice": null,
     "discountPercent": null
@@ -201,7 +201,7 @@
     "index": "22",
     "target": "wemakeprice",
     "url": "https://front.wemakeprice.com/deal/625887834",
-    "productName": "100g당 955원/ 입짧은햇님PICK 한선생 통김부각 40g 5개입 ▶ 구경하러가기",
+    "productName": "10g당 955원/ 입짧은햇님PICK 한선생 통김부각 40g 5개입 ▶ 구경하러가기",
     "originPrice": 19100,
     "salePrice": null,
     "discountPercent": null
@@ -218,11 +218,11 @@
   "24": {
     "index": "24",
     "target": "wemakeprice",
-    "url": "https://front.wemakeprice.com/deal/625645116",
-    "productName": "[슈퍼타임특가 12시]맛신선/아빠식당 설날 탕/국물 BEST 모음전 ▶ 구경하러가기",
-    "originPrice": 10900,
-    "salePrice": 7200,
-    "discountPercent": 34
+    "url": "https://front.wemakeprice.com/deal/626254435",
+    "productName": "[투데이특가 PICK]최대 46% 할인/ 브라운 오리지널 80매 캡 20팩 외 아기 물티슈 모음 ▶ 구경하러가기",
+    "originPrice": 29900,
+    "salePrice": null,
+    "discountPercent": null
   },
   "25": {
     "index": "25",
@@ -255,7 +255,7 @@
     "index": "28",
     "target": "wemakeprice",
     "url": "https://front.wemakeprice.com/deal/622290479",
-    "productName": "30%쿠폰/ 에뛰드 설맞이 BEST 빅세일 UPTO 70% ▶ 구경하러가기",
+    "productName": "30%쿠폰/ 에뛰드 설준비 빅세일 UPTO 70%/ 순정라인 사은품 이벤트 ▶ 구경하러가기",
     "originPrice": 8000,
     "salePrice": 4900,
     "discountPercent": 39
@@ -264,7 +264,7 @@
     "index": "29",
     "target": "wemakeprice",
     "url": "https://front.wemakeprice.com/deal/622290479",
-    "productName": "30%쿠폰/ 에뛰드 설맞이 BEST 빅세일 UPTO 70% ▶ 구경하러가기",
+    "productName": "30%쿠폰/ 에뛰드 설준비 빅세일 UPTO 70%/ 순정라인 사은품 이벤트 ▶ 구경하러가기",
     "originPrice": 8000,
     "salePrice": 4900,
     "discountPercent": 39
@@ -282,7 +282,7 @@
     "index": "31",
     "target": "gsshop",
     "url": "http://www.gsshop.com/prd/prd.gs?prdid=18732193&lseq=390725-7&gsid=ECmain-AU390725-AU390725-7&dseq=7&svcid=pc&bnclick=main-mrcm_mainMrcmW_apiBytedanceEx&rank=7",
-    "productName": "[5%더블] 미쟝센 퍼펙트세럼 80ml 2개입 (옵션)",
+    "productName": "[초특가] 미쟝센 퍼펙트세럼 80ml 2개입 (옵션)",
     "originPrice": 13600,
     "salePrice": null,
     "discountPercent": null
@@ -363,7 +363,7 @@
     "index": "40",
     "target": "gsshop",
     "url": "http://www.gsshop.com/prd/prd.gs?prdid=18732193&lseq=390725-7&gsid=ECmain-AU390725-AU390725-7&dseq=7&svcid=pc&bnclick=main-mrcm_mainMrcmW_apiBytedanceEx&rank=7",
-    "productName": "[5%더블] 미쟝센 퍼펙트세럼 80ml 2개입 (옵션)",
+    "productName": "[초특가] 미쟝센 퍼펙트세럼 80ml 2개입 (옵션)",
     "originPrice": 13600,
     "salePrice": null,
     "discountPercent": null
@@ -386,23 +386,14 @@
     "salePrice": 9900,
     "discountPercent": 1
   },
-  "43": {
-    "index": "43",
-    "target": "tmon",
-    "url": "http://www.tmon.co.kr/deal/9651815566",
-    "productName": "[티몬] [단하루] 폴햄 설맞이 시즌오프 SALE, 맨투맨/팬츠/아우터 외 91종",
-    "originPrice": 29900,
-    "salePrice": 6900,
-    "discountPercent": 77
-  },
   "44": {
     "index": "44",
     "target": "tmon",
     "url": "http://www.tmon.co.kr/deal/9648793830",
-    "productName": "[티몬] [T.FRESH] 티프레쉬 통영 당일공수 중대굴 선별 봉지 생굴 200g 외",
-    "originPrice": 3900,
-    "salePrice": null,
-    "discountPercent": null
+    "productName": "[티몬] [T.FRESH] 티프레쉬 통영 봉지굴 200g X 3봉 /중대굴 선별 /당일공수",
+    "originPrice": 26700,
+    "salePrice": 9900,
+    "discountPercent": 63
   },
   "45": {
     "index": "45",
@@ -458,49 +449,184 @@
     "salePrice": 148050,
     "discountPercent": 10
   },
-  "52": {
-    "index": "52",
-    "target": "emart",
-    "url": "http://emart.ssg.com/item/itemView.ssg?itemId=1000036684915&siteNo=6001&salestrNo=2034",
-    "productName": "플레이도 레인보우 시리즈 40캔 도우",
-    "originPrice": "21900",
+  "61": {
+    "index": "61",
+    "target": "auction",
+    "url": "http://itempage3.auction.co.kr/detailview.aspx?ItemNo=B814983898",
+    "productName": "듀라셀 알카라인 건전지 AAA 20개입 x 2개 - 옥션",
+    "originPrice": "18,900원",
     "salePrice": null,
     "discountPercent": null
   },
-  "53": {
-    "index": "53",
-    "target": "emart",
-    "url": "http://emart.ssg.com/item/itemView.ssg?itemId=1000064436269&siteNo=6001&salestrNo=6005",
-    "productName": "[무료배송] 광동 흑미차 500ml x 24pet (유통기한 22년 3월 30일)",
-    "originPrice": "24900",
-    "salePrice": "9900",
-    "discountPercent": 60
+  "62": {
+    "index": "62",
+    "target": "auction",
+    "url": "http://itempage3.auction.co.kr/DetailView.aspx?itemno=C220859288",
+    "productName": "멸균우유 1000ml x 10입 (1박스) - 옥션",
+    "originPrice": "26,000원",
+    "salePrice": "20,800원",
+    "discountPercent": "20%"
   },
-  "54": {
-    "index": "54",
-    "target": "emart",
-    "url": "http://emart.ssg.com/item/itemView.ssg?itemId=1000064436992&siteNo=6001&salestrNo=6005&click=itemMidArea02",
-    "productName": "[무료배송] 광동 흑미차 1.5L x 12pet",
-    "originPrice": "19900",
-    "salePrice": "17910",
-    "discountPercent": 9
+  "63": {
+    "index": "63",
+    "target": "auction",
+    "url": "http://itempage3.auction.co.kr/DetailView.aspx?itemno=C220859288",
+    "productName": "멸균우유 1000ml x 10입 (1박스) - 옥션",
+    "originPrice": "26,000원",
+    "salePrice": "20,800원",
+    "discountPercent": "20%"
   },
-  "55": {
-    "index": "55",
-    "target": "emart",
-    "url": "http://emart.ssg.com/item/itemView.ssg?itemId=1000114631628&siteNo=6001&salestrNo=6005&click=itemMidArea02",
-    "productName": "광동 흑미차 1.5L 12펫",
-    "originPrice": "19100",
+  "64": {
+    "index": "64",
+    "target": "auction",
+    "url": "http://itempage3.auction.co.kr/DetailView.aspx?itemno=B794447220",
+    "productName": "원할머니 명품육개장 600g 10팩 외 인기 국류 9종 - 옥션",
+    "originPrice": "26,600원",
+    "salePrice": "23,940원",
+    "discountPercent": "10%"
+  },
+  "65": {
+    "index": "65",
+    "target": "auction",
+    "url": "http://itempage3.auction.co.kr/DetailView.aspx?itemno=C492443793",
+    "productName": "(아웃백/이디야) 페이즈기프트 외식 5만원권 - 옥션",
+    "originPrice": "50,000원",
+    "salePrice": "44,500원",
+    "discountPercent": "11%"
+  },
+  "66": {
+    "index": "66",
+    "target": "auction",
+    "url": "http://itempage3.auction.co.kr/DetailView.aspx?itemno=B858733186",
+    "productName": "최대76% 워치스테이션 명품시계 50종 - 옥션",
+    "originPrice": "220,000원",
+    "salePrice": "110,000원",
+    "discountPercent": "50%"
+  },
+  "67": {
+    "index": "67",
+    "target": "auction",
+    "url": "http://itempage3.auction.co.kr/DetailView.aspx?ItemNo=B659037435",
+    "productName": "본사직영 스마트워치 남자시계 FTW1122 본사 AS - 옥션",
+    "originPrice": "250,000원",
+    "salePrice": "212,500원",
+    "discountPercent": "15%"
+  },
+  "68": {
+    "index": "68",
+    "target": "auction",
+    "url": "http://itempage3.auction.co.kr/DetailView.aspx?itemno=C282705337",
+    "productName": "비스포크 김치냉장고 RQ32A7602AP (혜택가77만원대) - 옥션",
+    "originPrice": "910,000원",
+    "salePrice": "819,000원",
+    "discountPercent": "10%"
+  },
+  "69": {
+    "index": "69",
+    "target": "auction",
+    "url": "http://itempage3.auction.co.kr/DetailView.aspx?ItemNo=C307923641",
+    "productName": "비스포크 냉장고 RF85A9103AP (혜택가137만원대) - 옥션",
+    "originPrice": "1,576,670원",
+    "salePrice": "1,419,000원",
+    "discountPercent": "10%"
+  },
+  "70": {
+    "index": "70",
+    "target": "auction",
+    "url": "http://itempage3.auction.co.kr/detailview.aspx?ItemNo=C300646280",
+    "productName": "삼성전자 PM9A1 M.2 NVMe 병행수입 512GB SSD - 옥션",
+    "originPrice": "95,060원",
     "salePrice": null,
     "discountPercent": null
   },
-  "56": {
-    "index": "56",
-    "target": "emart",
-    "url": "http://emart.ssg.com/item/itemView.ssg?itemId=1000289080220&siteNo=6001&salestrNo=2034",
-    "productName": "피코크 일호식스키야키",
-    "originPrice": "19800",
+  "71": {
+    "index": "71",
+    "target": "gmarket",
+    "url": "http://item.gmarket.co.kr/Item?goodsCode=2304694218",
+    "productName": "달콩이네 떡집  -  난 책읽기가 좋아",
+    "originPrice": "9900",
     "salePrice": null,
     "discountPercent": null
+  },
+  "72": {
+    "index": "72",
+    "target": "gmarket",
+    "url": "http://item.gmarket.co.kr/Item?goodsCode=2321258775",
+    "productName": "EBS 초등 기본서 만점왕 3-1 세트  전7권 (2022년)  알파북 계산편 + 만점왕 연산 샘플북 증정",
+    "originPrice": "44550",
+    "salePrice": null,
+    "discountPercent": null
+  },
+  "73": {
+    "index": "73",
+    "target": "gmarket",
+    "url": "http://item.gmarket.co.kr/Item?goodsCode=701004566",
+    "productName": "(행사상품)농협안심한우세절국거리 혼합 150g 팩",
+    "originPrice": "11310",
+    "salePrice": "11090",
+    "discountPercent": 1
+  },
+  "74": {
+    "index": "74",
+    "target": "gmarket",
+    "url": "http://item.gmarket.co.kr/Item?goodsCode=1247686575",
+    "productName": "1등급_대란30구",
+    "originPrice": "6390",
+    "salePrice": "6310",
+    "discountPercent": 1
+  },
+  "75": {
+    "index": "75",
+    "target": "gmarket",
+    "url": "http://item.gmarket.co.kr/Item?goodsCode=2254368471",
+    "productName": "저분자콜라겐 비오틴 플러스  3통(3개월) +쇼핑백증정",
+    "originPrice": "68000",
+    "salePrice": "59160",
+    "discountPercent": 13
+  },
+  "76": {
+    "index": "76",
+    "target": "gmarket",
+    "url": "http://item.gmarket.co.kr/Item?goodsCode=1677882956",
+    "productName": "홈쇼핑 빅사이즈 20% 구스다운 패딩/기모바지/코트",
+    "originPrice": "66300",
+    "salePrice": "19900",
+    "discountPercent": 69
+  },
+  "77": {
+    "index": "77",
+    "target": "gmarket",
+    "url": "http://item.gmarket.co.kr/Item?goodsCode=1677882918",
+    "productName": "홈쇼핑히트 20%쿠폰 빅사이즈 캐시미어니트3종세트",
+    "originPrice": "66300",
+    "salePrice": "19900",
+    "discountPercent": 69
+  },
+  "78": {
+    "index": "78",
+    "target": "gmarket",
+    "url": "http://item.gmarket.co.kr/Item?goodsCode=1744733685",
+    "productName": "롯데헬스원 초유 프로틴 365 280gx2통 +1통더(스푼)",
+    "originPrice": "37900",
+    "salePrice": "34900",
+    "discountPercent": 7
+  },
+  "79": {
+    "index": "79",
+    "target": "gmarket",
+    "url": "http://item.gmarket.co.kr/Item?goodsCode=1695176334",
+    "productName": "롯데헬스원 황작 홍삼젤리 30포",
+    "originPrice": "17900",
+    "salePrice": "15900",
+    "discountPercent": 11
+  },
+  "80": {
+    "index": "80",
+    "target": "gmarket",
+    "url": "http://item.gmarket.co.kr/Item?goodsCode=2140254993",
+    "productName": "초유 프로틴365 (쉐이크 보틀/10입)  + 10입 총 2박스",
+    "originPrice": "29900",
+    "salePrice": "27900",
+    "discountPercent": 6
   }
 }
