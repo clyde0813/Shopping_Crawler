@@ -186,14 +186,14 @@ class ShoppingDetail:
 
     def json_combine(self):
         z = {}
-        for i in range(15, 0, -1):
+        for i in range(16, 0, -1):
             i = str(i) + ".json"
             z = json.load(open(i)) | z
             if os.path.isfile(i):
                 os.remove(i)
         json.dump(z, open('output.json', 'w'), ensure_ascii=False)
         z = {}
-        for i in range(15, 0, -1):
+        for i in range(16, 0, -1):
             i = str(i) + "error.json"
             z = json.load(open(i)) | z
             if os.path.isfile(i):
