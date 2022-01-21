@@ -217,7 +217,8 @@ class ShoppingDetail:
         th12 = Process(target=object.detail, args=("12", range(11 * a, 12 * a)))
         th13 = Process(target=object.detail, args=("13", range(12 * a, 13 * a)))
         th14 = Process(target=object.detail, args=("14", range(13 * a, 14 * a)))
-        th15 = Process(target=object.detail, args=("15", range(14 * a, 15 * a + b)))
+        th15 = Process(target=object.detail, args=("15", range(14 * a, 15 * a)))
+        th16 = Process(target=object.detail, args=("16", range(15 * a, 15 * a + b)))
         th1.start()
         th2.start()
         th3.start()
@@ -233,6 +234,7 @@ class ShoppingDetail:
         th13.start()
         th14.start()
         th15.start()
+        th16.start()
 
         th1.join()
         th2.join()
@@ -249,6 +251,7 @@ class ShoppingDetail:
         th13.join()
         th14.join()
         th15.join()
+        th16.join()
         self.json_combine()
 
 

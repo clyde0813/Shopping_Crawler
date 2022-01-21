@@ -1,14 +1,1 @@
-{
-  "11": {
-    "target": "11st",
-    "url": "https://www.11st.co.kr/products/2217118240",
-    "error": "'NoneType' object has no attribute 'group'",
-    "status_code": null
-  },
-  "41": {
-    "target": "tmon",
-    "url": "http://www.tmon.co.kr/deal/9615230994",
-    "error": "'NoneType' object has no attribute 'group'",
-    "status_code": null
-  }
-}
+{"64": {"target": "auction", "url": "http://itempage3.auction.co.kr/DetailView.aspx?itemno=B794447220", "error": "'NoneType' object has no attribute 'text'", "status_code": null}, "71": {"target": "gmarket", "url": "http://item.gmarket.co.kr/Item?goodsCode=2304694218", "error": "'NoneType' object has no attribute 'group'", "status_code": null}, "100": {"target": "lotteimall", "url": "https://www.lotteimall.com/goods/viewGoodsDetail.lotte?goods_no=1245417640", "error": "'NoneType' object has no attribute 'group'", "status_code": null}}
