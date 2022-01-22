@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup as bs
 from requests.auth import HTTPBasicAuth
 import requests
 from fake_useragent import UserAgent
-from http_request_randomizer.requests.proxy.requestProxy import RequestProxy
 import re
 
 # # interpark
@@ -210,17 +209,20 @@ import re
 #     print(time.time() - start)
 
 
-start = time.time()
-headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
-html = requests.get(
-    "https://www.akmall.com/goods/GoodsDetail.do?goods_id=84990345",
-    headers=headers).text
-bsObject = bs(html, "lxml")
-print(bsObject.find("meta", {"property": "og:title"})['content'])
-# print(html)
-data = re.search(r'"product": (.*?)}', html, re.S).group(1)
-data = data.replace("//Optional", "") + "}"
-print(json.loads(data)["unit_price"])
-print(json.loads(data)['unit_sale_price'])
-print(time.time() - start)
+# start = time.time()
+# headers = {
+#     'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
+# html = requests.get(
+#     "https://www.akmall.com/goods/GoodsDetail.do?goods_id=84990345",
+#     headers=headers).text
+# bsObject = bs(html, "lxml")
+# print(bsObject.find("meta", {"property": "og:title"})['content'])
+# # print(html)
+# data = re.search(r'"product": (.*?)}', html, re.S).group(1)
+# data = data.replace("//Optional", "") + "}"
+# print(json.loads(data)["unit_price"])
+# print(json.loads(data)['unit_sale_price'])
+# print(time.time() - start)
+error = json.load(open("error.json"))
+success = json.load(open("output.json"))
+print("Error count : %d\nSuccess count : %d" %(len(error),len(success)))

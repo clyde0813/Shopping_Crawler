@@ -260,3 +260,6 @@ if __name__ == '__main__':
     shop = ShoppingDetail()
     shop.run(shop)
     print(time.time() - start_time)
+    error = json.load(open("error.json"))
+    success = json.load(open("output.json"))
+    print("Error count : %d\nSuccess count : %d" %(len(error),len(success)))
