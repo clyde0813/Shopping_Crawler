@@ -1,30 +1,36 @@
-import concurrent.futures
-import multiprocessing
-import os
-import sys
-
 import tqdm as tq
-from multiprocessing import Process, Queue
+from multiprocessing import Process
 from bs4 import BeautifulSoup as bs
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from fake_useragent import UserAgent
+import os
 import requests
 import re
 import json
 import time
 import math
-from fake_useragent import UserAgent
-import threading
 
 
 class ShoppingDetail:
     def __init__(self):
-        # bypass detection
-        self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
-
         # target.json load
         self.target = json.load(open("target.json"))
         # conf.jons load
         self.conf = json.load(open("conf.json"))
+        # headers
+        self.ua = UserAgent()
+        self.userAgent = self.ua.random
+        self.headers = {'User-Agent': self.userAgent}
+
+        # selenium webdriver
+        self.options = webdriver.ChromeOptions()
+        self.options.add_argument("User-Agent:" + self.userAgent)
+        self.options.add_argument("headless")
+        self.options.add_argument('window-size=1920x1080')
+        self.options.add_argument("disable-gpu")
+        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager.install()), options=self.options)
 
     def text_filter(self, o, s, d):
         if type(o) is str:
@@ -146,6 +152,10 @@ class ShoppingDetail:
                 "salePrice": text_filter[1], "discountPercent": text_filter[2]}
         return d[i]
 
+    def selenium_crawl(self, i, mall, url, headers, conf, d):
+        driver = self.driver
+        driver.get(url)
+
     def detail(self, file_name, t):
         # redefining 4 convenience
         target = self.target
@@ -163,9 +173,6 @@ class ShoppingDetail:
             i = str(i)
             mall = target[i]["target"]
             url = target[i]["url"]
-            ua = UserAgent()
-            userAgent = ua.random
-            headers = {'User-Agent': userAgent}
             try:
                 if mall == "emart":
                     pass
@@ -262,4 +269,4 @@ if __name__ == '__main__':
     print(time.time() - start_time)
     error = json.load(open("error.json"))
     success = json.load(open("output.json"))
-    print("Error count : %d\nSuccess count : %d" %(len(error),len(success)))
+    print("Error count : %d\nSuccess count : %d" % (len(error), len(success)))

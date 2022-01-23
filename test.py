@@ -223,6 +223,23 @@ import re
 # print(json.loads(data)["unit_price"])
 # print(json.loads(data)['unit_sale_price'])
 # print(time.time() - start)
-error = json.load(open("error.json"))
-success = json.load(open("output.json"))
-print("Error count : %d\nSuccess count : %d" %(len(error),len(success)))
+# error = json.load(open("error.json"))
+# success = json.load(open("output.json"))
+# print("Error count : %d\nSuccess count : %d" %(len(error),len(success)))
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
+ua = UserAgent()
+userAgent = ua.random
+options = webdriver.ChromeOptions()
+options.add_argument("headless")
+options.add_argument('user-agent=' + userAgent)
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+driver.implicitly_wait(10)
+driver.get('https://www.g9.co.kr/Display/VIP/Index/1914711796')
+html = driver.page_source
+soup = bs(html, 'lxml')
+price = soup.select_one('#sDPrice2').text
+print(price)
+# print(html)
