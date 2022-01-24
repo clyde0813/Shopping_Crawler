@@ -1,16 +1,37 @@
-import tqdm as tq
 from multiprocessing import Process
 from bs4 import BeautifulSoup as bs
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from fake_useragent import UserAgent
+import tqdm as tq
 import os
 import requests
 import re
 import json
 import time
 import math
+
+
+# --------------------------------------------------------------------
+# Last Modified Date : 2022.12.24
+# Author : 박정후
+# 롯데온, 씨제이스타일, g9, emart 는 JS 로딩 없을 경우 크롤링 불가 (Selenium 추가)
+# 이마트 크롤링 탐지(401리턴) 우회를 위해 Tor Proxy, 3초 sleep 필요
+# request+bs4 15 프로세스 병렬 -> 100개 10초 초반
+# --------------------------------------------------------------------
+
+class SeleniumInit:
+    # # selenium webdriver
+    options = webdriver.ChromeOptions()
+    options.add_argument(
+        'User-Agent=Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36')
+    options.add_argument("headless")
+    options.add_argument('window-size=1920x1080')
+    options.add_argument("disable-gpu")
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
+
+driver = SeleniumInit.driver
 
 
 class ShoppingDetail:
@@ -20,18 +41,10 @@ class ShoppingDetail:
         # conf.jons load
         self.conf = json.load(open("conf.json"))
         # headers
-        self.ua = UserAgent()
-        self.userAgent = self.ua.random
-        self.headers = {'User-Agent': self.userAgent}
+        self.headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
 
-        # selenium webdriver
-        self.options = webdriver.ChromeOptions()
-        self.options.add_argument("User-Agent:" + self.userAgent)
-        self.options.add_argument("headless")
-        self.options.add_argument('window-size=1920x1080')
-        self.options.add_argument("disable-gpu")
-        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager.install()), options=self.options)
-
+    # text to int filter
     def text_filter(self, o, s, d):
         if type(o) is str:
             o = int(o.replace(",", "").replace("원", ""))
@@ -41,6 +54,7 @@ class ShoppingDetail:
             d = int(d.replace("%", ""))
         return o, s, d
 
+    # interpark, 11st, wemakeprice, gsshop, tmon, galleria, akmall
     def normal_crawl(self, i, mall, url, headers, conf, d):
         # target mall, url
         html = requests.get(url, headers=headers).text
@@ -76,17 +90,17 @@ class ShoppingDetail:
 
         return d[i]
 
+    # auction
     def auction_crawl(self, i, mall, url, headers, conf, d):
         html = requests.get(url, headers=headers).text
         bsObject = bs(html, "lxml")
+        product_name = bsObject.find("meta", {"property": "og:" + conf[mall]['productName']})['content']
         try:
-            product_name = bsObject.find("meta", {"property": "og:" + conf[mall]['productName'] + ""})['content']
             origin_price = bsObject.find("span", {conf[mall]["originPrice"][0]: conf[mall]["originPrice"][1]}).text
             sale_price = bsObject.find("strong", {conf[mall]["salePrice"][0]: conf[mall]["salePrice"][1]}).text
             discount_percent = bsObject.find("strong",
                                              {conf[mall]["discountPercent"][0]: conf[mall]["discountPercent"][1]}).text
         except:
-            product_name = bsObject.find("meta", {"property": "og:" + conf[mall]['productName'] + ""})['content']
             try:
                 origin_price = bsObject.find("span",
                                              {conf[mall]["originPrice"][0]: conf[mall]["originPrice"][3]}).text.replace(
@@ -105,6 +119,7 @@ class ShoppingDetail:
 
         return d[i]
 
+    # gmarket
     def gmarket_crawl(self, i, mall, url, headers, conf, d):
         html = requests.get(url, headers=headers).text
         bsObject = bs(html, "lxml")
@@ -125,6 +140,7 @@ class ShoppingDetail:
 
         return d[i]
 
+    # lotteimall
     def lotteimall_crawl(self, i, mall, url, headers, conf, d):
         html = requests.get(url, headers=headers).text
         bsObject = bs(html, "lxml")
@@ -152,9 +168,79 @@ class ShoppingDetail:
                 "salePrice": text_filter[1], "discountPercent": text_filter[2]}
         return d[i]
 
-    def selenium_crawl(self, i, mall, url, headers, conf, d):
-        driver = self.driver
+    # skstoa
+    def skstoa(self, i, mall, url, headers, conf, d):
+        html = requests.get(url, headers=headers).text
+        bsObject = bs(html, "lxml")
+        product_name = bsObject.find("meta", {"property": "og:" + conf[mall]["productName"]})['content']
+        try:
+            origin_price = bsObject.select_one(conf[mall]["originPrice"]).text
+            sale_price = bsObject.select_one(conf[mall]["salePrice"]).text
+            discount_percent = bsObject.select_one(conf[mall]["discountPercent"]).text
+        except:
+            origin_price = bsObject.select_one(conf[mall]["originPrice2"]).text
+            sale_price = None
+            discount_percent = None
+        text_filter = self.text_filter(origin_price, sale_price, discount_percent)
+        # adding data to dictionary
+        d[i] = {"index": int(i), "target": mall, "url": url, "productName": product_name,
+                "originPrice": text_filter[0],
+                "salePrice": text_filter[1], "discountPercent": text_filter[2]}
+
+        return d[i]
+
+    def emart_crawl(self, i, mall, url, headers, conf, d):
+        # 신세계 계열은 크롤링 방지를 피하기 위해 프록시, sleep 필요
+        proxies = {'http': 'socks5://127.0.0.1:9050', 'https': "socks://127.0.0.1:9050"}
+        html = requests.get(url, headers=headers, proxies=proxies).text
+        bsObject = bs(html, "lxml")
+        product_name = bsObject.find("meta", {"property": "og:" + conf[mall]["productName"]})["content"]
+        try:
+            origin_price = bsObject.find("input", {"id": conf[mall]["originPrice"][0]})["value"]
+            sale_price = bsObject.find("input", {"id": conf[mall]["salePrice"]})["value"]
+        except:
+            origin_price = re.search(conf[mall]["originPrice"][1], html, re.S).group(1)
+            sale_price = None
+        if origin_price == sale_price or sale_price is None:
+            sale_price = None
+            discount_percent = None
+        elif origin_price is None and sale_price is not None:
+            origin_price = sale_price
+            sale_price = None
+            discount_percent = None
+        else:
+            discount_percent = math.trunc(100 * (1 - (int(sale_price) / int(origin_price))))
+        text_filter = self.text_filter(origin_price, sale_price, discount_percent)
+        # adding data to dictionary
+        d[i] = {"index": int(i), "target": mall, "url": url, "productName": product_name,
+                "originPrice": text_filter[0],
+                "salePrice": text_filter[1], "discountPercent": text_filter[2]}
+        return d[i]
+
+    def selenium_crawl(self, i, mall, url, conf, d):
         driver.get(url)
+        html = driver.page_source
+        bsObject = bs(html, 'lxml')
+        product_name = bsObject.find(conf[mall]["productName"][0],
+                                     {conf[mall]["productName"][1]: conf[mall]["productName"][2]})["content"]
+        try:
+            origin_price = bsObject.select_one(conf[mall]["originPrice"][0]).text
+        except:
+            origin_price = bsObject.select_one(conf[mall]["originPrice"][1]).text
+        try:
+            sale_price = bsObject.select_one(conf[mall]["salePrice"]).text
+        except:
+            sale_price = None
+        try:
+            discount_percent = bsObject.find(conf[mall]["discountPercent"]).text
+        except:
+            discount_percent = None
+        text_filter = self.text_filter(origin_price, sale_price, discount_percent)
+        # adding data to dictionary
+        d[i] = {"index": int(i), "target": mall, "url": url, "productName": product_name,
+                "originPrice": text_filter[0],
+                "salePrice": text_filter[1], "discountPercent": text_filter[2]}
+        return d[i]
 
     def detail(self, file_name, t):
         # redefining 4 convenience
@@ -174,14 +260,20 @@ class ShoppingDetail:
             mall = target[i]["target"]
             url = target[i]["url"]
             try:
-                if mall == "emart":
-                    pass
+                if mall == "emart" or mall == "ssg":
+                    self.emart_crawl(i, mall, url, headers, conf, d)
+                    if target[str(int(i) + 1)]["target"] == "emart" or target[str(int(i) + 1)]["target"] == "ssg":
+                        time.sleep(3)
                 elif mall == "auction":
                     self.auction_crawl(i, mall, url, headers, conf, d)
                 elif mall == "gmarket":
                     self.gmarket_crawl(i, mall, url, headers, conf, d)
                 elif mall == "lotteimall":
                     self.lotteimall_crawl(i, mall, url, headers, conf, d)
+                elif mall == "skstoa":
+                    self.skstoa(i, mall, url, headers, conf, d)
+                elif mall == 'cjonstyle' or mall == 'g9' or mall == 'lotteon':
+                    self.selenium_crawl(i, mall, url, conf, d)
                 else:
                     self.normal_crawl(i, mall, url, headers, conf, d)
             except Exception as e:

@@ -79,9 +79,61 @@
   },
   "akmall": {
     "productName": "title",
-    "jsonRegex" : "\"product\": (.*?)}",
+    "jsonRegex": "\"product\": (.*?)}",
     "originPrice": "unit_price",
     "salePrice": "unit_sale_price",
     "discountPercent": ""
+  },
+  "emart": {
+    "productName": "title",
+    "originPrice": [
+      "sellprc",
+      "bestAmt:parseInt\\(\\'(.*?)\\',"
+    ],
+    "salePrice": "sellUnitPrc"
+  },
+  "ssg": {
+    "productName": "title",
+    "originPrice": [
+      "ssg_price"
+    ],
+    "salePrice": "ssg_price"
+  },
+  "g9": {
+    "productName": [
+      "meta",
+      "property",
+      "og:title"
+    ],
+    "originPrice": [
+      "#sDPrice2"
+    ],
+    "salePrice": ""
+  },
+  "cjonstyle": {
+    "productName": [
+      "meta",
+      "property",
+      "og:title"
+    ],
+    "originPrice": [
+      "#content > div.prd_wrap > div.prd_detail_cont > div.prd_info_wrap > div.prd_content_wrap > div.prd_info > div.price_area > span > span.txt_del > strong",
+      "#content > div.prd_wrap > div.prd_detail_cont > div.prd_info_wrap > div.prd_content_wrap > div.prd_info > div.price_area > span > strong"
+    ],
+    "salePrice": "#content > div.prd_wrap > div.prd_detail_cont > div.prd_info_wrap > div.prd_content_wrap > div.prd_info > div.price_area > span > span.txt_del > strong",
+    "discountPercent": "#content > div.prd_wrap > div.prd_detail_cont > div.prd_info_wrap > div.prd_content_wrap > div.prd_info > div.price_area > span > span.txt_sale > strong"
+  },
+  "lotteon": {
+    "productName": [
+      "meta",
+      "property",
+      "og:title"
+    ],
+    "originPrice": [
+      "#stickyTopParent > div.productDetailTop > div:nth-child(2) > div > div.discountPriceInfo > div > span",
+      "#stickyTopParent > div.productDetailTop.chanelProductTop > div:nth-child(1) > div > div > div > div.priceInfo > div > span"
+    ],
+    "salePrice": "#stickyTopParent > div.productDetailTop > div:nth-child(2) > div > div.priceInfo > div > span",
+    "discountPercent": "#stickyTopParent > div.productDetailTop > div:nth-child(2) > div > div.discountPriceInfo > span"
   }
 }
