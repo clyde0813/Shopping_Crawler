@@ -261,9 +261,10 @@ class ShoppingDetail:
             url = target[i]["url"]
             try:
                 if mall == "emart" or mall == "ssg":
-                    self.emart_crawl(i, mall, url, headers, conf, d)
-                    if target[str(int(i) + 1)]["target"] == "emart" or target[str(int(i) + 1)]["target"] == "ssg":
-                        time.sleep(3)
+                    # self.emart_crawl(i, mall, url, headers, conf, d)
+                    # if target[str(int(i) + 1)]["target"] == "emart" or target[str(int(i) + 1)]["target"] == "ssg":
+                    #     time.sleep(3)
+                    pass
                 elif mall == "auction":
                     self.auction_crawl(i, mall, url, headers, conf, d)
                 elif mall == "gmarket":
@@ -273,7 +274,8 @@ class ShoppingDetail:
                 elif mall == "skstoa":
                     self.skstoa(i, mall, url, headers, conf, d)
                 elif mall == 'cjonstyle' or mall == 'g9' or mall == 'lotteon':
-                    self.selenium_crawl(i, mall, url, conf, d)
+                    # self.selenium_crawl(i, mall, url, conf, d)
+                    pass
                 else:
                     self.normal_crawl(i, mall, url, headers, conf, d)
             except Exception as e:
@@ -355,10 +357,12 @@ class ShoppingDetail:
 
 
 if __name__ == '__main__':
-    start_time = time.time()
     shop = ShoppingDetail()
+    start_time = time.time()
     shop.run(shop)
     print(time.time() - start_time)
     error = json.load(open("error.json"))
     success = json.load(open("output.json"))
     print("Error count : %d\nSuccess count : %d" % (len(error), len(success)))
+    driver.close()
+    driver.quit()
